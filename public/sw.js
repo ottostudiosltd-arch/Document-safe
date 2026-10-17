@@ -1,5 +1,5 @@
-// DocuSafe Service Worker v3
-const CACHE_NAME = 'docusafe-v3';
+// DocuSafe Service Worker v5
+const CACHE_NAME = 'docusafe-v5';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
