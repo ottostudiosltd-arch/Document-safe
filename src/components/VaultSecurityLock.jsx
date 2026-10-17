@@ -88,7 +88,7 @@ export default function VaultSecurityLock({ onUnlock }) {
         {/* Security Notice Pill */}
         <div className="mt-3.5 px-3 py-1 rounded-full bg-[#F7EBEB] border border-[#EBD4D4] text-[#743E3E] text-[11px] font-bold flex items-center gap-1.5">
           <ShieldCheck className="w-3.5 h-3.5 text-[#8D5050]" />
-          <span>Supabase Auth Protected</span>
+          <span>256-Bit Encrypted Cloud Vault</span>
         </div>
 
         {/* Error Feedback */}
@@ -169,7 +169,7 @@ export default function VaultSecurityLock({ onUnlock }) {
         {/* Quick Demo Credential Autofill Pill */}
         <div className="mt-5 pt-4 border-t border-[#EADFD7] w-full flex flex-col items-center">
           <p className="text-[11px] text-[#7A665A] mb-2">
-            Friend & Reviewer Access:
+            Owner Quick Access:
           </p>
           <button
             type="button"

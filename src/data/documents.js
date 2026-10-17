@@ -291,7 +291,7 @@ export const INITIAL_DOCUMENTS = [
 export const PROFILE_INFO = {
   fullName: 'Ashraf Ahmed',
   honorific: 'Hafiz Mohammad Ashraf Ahmed',
-  greetingName: 'Tausif & Ashraf',
+  greetingName: 'Ashraf Ahmed',
   dob: '01 January 1999',
   gender: 'Male',
   fatherName: 'Md. Safiqur Rahman',
@@ -318,7 +318,7 @@ export const QUICK_TIPS = [
   },
   {
     icon: 'Cloud',
-    title: 'Store backup in cloud (Supabase / Drive)',
+    title: 'Store backup in secure cloud locker',
     desc: 'Sync confidential scans to lifetime cloud storage.'
   },
   {

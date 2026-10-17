@@ -82,7 +82,7 @@ export const authenticateVault = async (identifier, password) => {
       if (error.message?.includes('Email not confirmed')) {
         return { 
           success: false, 
-          error: 'Supabase email confirmation pending. Use password Ashraf#Vault@2026! to unlock.' 
+          error: 'Cloud vault verification pending. Use master password to unlock.' 
         };
       }
       return { success: false, error: error.message || 'Invalid credentials' };

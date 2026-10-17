@@ -111,10 +111,10 @@ export default function Sidebar({
           </p>
           <div className="mt-2 pt-2 border-t border-[#F5ECE5] flex items-center justify-between text-[10px] text-[#A8978B]">
             <span className="flex items-center gap-1">
-              <Cloud className="w-3 h-3 text-[#8D5050]" /> Supabase Connected
+              <Cloud className="w-3 h-3 text-[#8D5050]" /> Cloud Vault
             </span>
-            <span className="font-mono text-[9px] truncate max-w-[80px]" title={SUPABASE_PROJECT_ID}>
-              {SUPABASE_PROJECT_ID.slice(0, 8)}...
+            <span className="font-mono text-[9px] text-emerald-600 font-bold">
+              Synced
             </span>
           </div>
         </div>

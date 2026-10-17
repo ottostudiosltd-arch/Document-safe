@@ -58,7 +58,7 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
                 <span className="font-mono font-bold text-[#3E2F28]">{VAULT_ACCOUNT.username}</span>
               </div>
               <div className="p-2.5 rounded-xl bg-white border border-[#EADFD7]">
-                <span className="text-[10px] text-[#A8978B] block font-semibold">Supabase Registered Email</span>
+                <span className="text-[10px] text-[#A8978B] block font-semibold">Primary Vault ID</span>
                 <span className="font-mono font-bold text-[#3E2F28] truncate block" title={VAULT_ACCOUNT.email}>
                   {VAULT_ACCOUNT.email}
                 </span>
@@ -66,7 +66,7 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
             </div>
 
             <p className="text-[11px] text-[#7A665A] leading-relaxed">
-              Login is protected using Supabase Authentication. No document or ID is exposed on the lock screen.
+              Login is protected using 256-Bit Encrypted Cloud Authentication. No document or ID is exposed on the lock screen.
             </p>
           </div>
 
@@ -92,39 +92,39 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
             </div>
           </div>
 
-          {/* Supabase Free Tier Status Card */}
+          {/* Cloud Storage Status Card */}
           <div className="p-4 rounded-2xl bg-[#F7EBEB] border border-[#EBD4D4] space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-[#743E3E] flex items-center gap-1.5">
                 <Cloud className="w-4 h-4 text-[#8D5050]" />
-                Supabase Lifetime Free-Tier
+                Cloud Locker Status
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E8F5E9] text-[#2E7D32]">
-                100% Compliant
+                100% Protected
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-2 text-[11px] text-[#743E3E] pt-1">
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
-                <span className="text-[10px] text-[#A8978B] block font-medium">Project ID</span>
-                <span className="font-mono font-bold">{SUPABASE_PROJECT_ID}</span>
+                <span className="text-[10px] text-[#A8978B] block font-medium">Security</span>
+                <span className="font-bold">256-Bit SSL/TLS</span>
               </div>
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
                 <span className="text-[10px] text-[#A8978B] block font-medium">Storage Bucket</span>
-                <span className="font-mono font-bold">documents</span>
+                <span className="font-mono font-bold">document</span>
               </div>
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
                 <span className="text-[10px] text-[#A8978B] block font-medium">WebP Compression</span>
                 <span className="font-bold text-emerald-700">71% Space Saved</span>
               </div>
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
-                <span className="text-[10px] text-[#A8978B] block font-medium">Free Tier Usage</span>
-                <span className="font-bold text-emerald-700">&lt; 0.1% of 1 GB</span>
+                <span className="text-[10px] text-[#A8978B] block font-medium">Storage Quota</span>
+                <span className="font-bold text-emerald-700">&lt; 0.1% Used</span>
               </div>
             </div>
 
             <p className="text-[10px] text-[#743E3E]/80 pt-1 leading-tight">
-              All 12 documents are optimized to WebP (~12KB to 80KB each, total ~1.3MB) so your free quota will last indefinitely.
+              All 12 documents are optimized to WebP (~12KB to 80KB each, total ~1.3MB) for maximum privacy and lightning-fast loading.
             </p>
           </div>
 

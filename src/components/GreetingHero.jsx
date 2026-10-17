@@ -9,7 +9,7 @@ export default function GreetingHero({ totalDocs, onOpenAddModal }) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#3E2F28] tracking-tight flex items-center gap-2">
-            <span>Assalamu Alaikum, Tausif!</span>
+            <span>Assalamu Alaikum, Ashraf!</span>
             <span className="text-2xl sm:text-3xl inline-block hover:animate-bounce">👋</span>
           </h1>
           <p className="text-xs sm:text-sm text-[#7A665A] mt-1 font-medium">

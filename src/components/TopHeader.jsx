@@ -114,7 +114,7 @@ export default function TopHeader({
                     🛡️ <strong>100% Compressed:</strong> All 12 documents converted to WebP (71% storage saved).
                   </div>
                   <div className="p-2 rounded-xl bg-[#E8F5E9] text-[#2E7D32]">
-                    ☁️ <strong>Supabase Connected:</strong> Project ID bjoszpgpwobgfvwhbgng.
+                    ☁️ <strong>Cloud Vault:</strong> Encrypted & Synced.
                   </div>
                 </div>
               </div>
@@ -128,10 +128,10 @@ export default function TopHeader({
               className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#EADFD7] hover:bg-[#F5ECE5] transition-colors shadow-warm-sm"
             >
               <div className="w-7 h-7 rounded-full bg-[#8D5050] text-white font-bold text-xs flex items-center justify-center">
-                T
+                A
               </div>
               <span className="text-xs font-bold text-[#3E2F28] hidden sm:inline">
-                Tausif
+                Ashraf
               </span>
               <ChevronDown className="w-3 h-3 text-[#A8978B]" />
             </button>
@@ -139,8 +139,8 @@ export default function TopHeader({
             {profileDropdownOpen && (
               <div className="absolute right-0 mt-2 w-52 bg-[#FFFFFF] border border-[#EADFD7] rounded-2xl p-2 shadow-warm-lg z-50 text-left animate-in fade-in duration-150">
                 <div className="px-3 py-2 border-b border-[#F5ECE5]">
-                  <span className="text-xs font-bold text-[#3E2F28] block">Tausif Shaikh</span>
-                  <span className="text-[10px] text-[#A8978B] block">Vault for Ashraf Ahmed</span>
+                  <span className="text-xs font-bold text-[#3E2F28] block">Ashraf Ahmed</span>
+                  <span className="text-[10px] text-[#A8978B] block">Personal Document Vault</span>
                 </div>
                 
                 <button
