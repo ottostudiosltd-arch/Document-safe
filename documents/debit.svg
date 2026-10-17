@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <defs>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="200" rx="16" fill="url(#cardGrad)"/>
+  <rect x="220" y="18" width="16" height="16" fill="#ed232a"/>
+  <rect x="224" y="22" width="8" height="8" fill="#ffffff"/>
+  <text x="245" y="32" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff">HDFC BANK</text>
+  <text x="25" y="35" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff">MoneyBack</text>
+  <rect x="25" y="65" width="46" height="35" rx="6" fill="#fde047" stroke="#eab308" stroke-width="1"/>
+  <line x1="25" y1="82" x2="71" y2="82" stroke="#ca8a04" stroke-width="1"/>
+  <line x1="48" y1="65" x2="48" y2="100" stroke="#ca8a04" stroke-width="1"/>
+  <text x="25" y="135" font-family="monospace" font-size="17" font-weight="bold" fill="#ffffff" letter-spacing="3">4191 •••• •••• 1157</text>
+  <text x="130" y="160" font-family="sans-serif" font-size="9" fill="#93c5fd">VAL THRU 08/27</text>
+  <text x="25" y="180" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff">ASHRAF AHMED</text>
+  <text x="240" y="182" font-family="sans-serif" font-size="18" font-weight="extrabold" font-style="italic" fill="#ffffff">VISA</text>
+</svg>
