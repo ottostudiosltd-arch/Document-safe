@@ -112,8 +112,8 @@ export const signOutSupabase = async () => {
   lockVault();
 };
 
-// Base URL for Supabase storage public bucket
-export const SUPABASE_STORAGE_BASE = `${SUPABASE_URL}/storage/v1/object/public/documents`;
+// Base URL for Supabase storage bucket
+export const SUPABASE_STORAGE_BASE = `${SUPABASE_URL}/storage/v1/object/public/document`;
 
 // Helper to get image URL with fallback to local SVG
 export const getDocumentImageUrl = (fileName, fallbackSvg) => {
@@ -121,12 +121,12 @@ export const getDocumentImageUrl = (fileName, fallbackSvg) => {
   return `${SUPABASE_STORAGE_BASE}/${fileName}`;
 };
 
-// Upload document to Supabase Storage bucket 'documents'
+// Upload document to Supabase Storage bucket 'document'
 export const uploadToSupabase = async (file, fileName) => {
   try {
     const filePath = `user_docs/${Date.now()}_${fileName}`;
     const { data, error } = await supabase.storage
-      .from('documents')
+      .from('document')
       .upload(filePath, file, {
         contentType: file.type || 'image/webp',
         upsert: true
@@ -135,7 +135,7 @@ export const uploadToSupabase = async (file, fileName) => {
     if (error) throw error;
 
     const { data: publicUrlData } = supabase.storage
-      .from('documents')
+      .from('document')
       .getPublicUrl(filePath);
 
     return { success: true, url: publicUrlData.publicUrl };

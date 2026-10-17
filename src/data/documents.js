@@ -2,7 +2,7 @@ const BASE = import.meta.env.BASE_URL || './';
 const docSvg = (file) => `${BASE}documents/${file}`;
 
 // Supabase Storage Public Bucket URL
-export const SUPABASE_BUCKET_URL = 'https://bjoszpgpwobgfvwhbgng.supabase.co/storage/v1/object/public/documents';
+export const SUPABASE_BUCKET_URL = 'https://bjoszpgpwobgfvwhbgng.supabase.co/storage/v1/object/public/document';
 const supabaseDoc = (file) => `${SUPABASE_BUCKET_URL}/${file}`;
 
 export const INITIAL_DOCUMENTS = [
