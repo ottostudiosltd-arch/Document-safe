@@ -4,6 +4,8 @@
 
 @layer base {
   body {
+    background-color: #FBF8F5;
+    color: #3E2F28;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
   
@@ -12,45 +14,26 @@
   }
 }
 
-/* Custom scrollbars */
+/* Custom warm scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: #F5ECE5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.4);
+  background: #D8C7BC;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.6);
+  background: #B87D7D;
 }
 
-/* Glassmorphism */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card {
-  background: rgba(30, 41, 59, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.glass-card:hover {
-  border-color: rgba(56, 189, 248, 0.3);
-}
-
-/* Print styling for printing or saving PDF of documents */
+/* Print styling */
 @media print {
   body {
     background: #ffffff !important;
@@ -58,12 +41,5 @@
   }
   .no-print {
     display: none !important;
-  }
-  .print-only {
-    display: block !important;
-  }
-  .printable-document {
-    page-break-inside: avoid;
-    break-inside: avoid;
   }
 }

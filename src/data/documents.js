@@ -1,9 +1,10 @@
-const BASE = import.meta.env.BASE_URL || '/';
+const BASE = import.meta.env.BASE_URL || './';
 const docImg = (file) => `${BASE}documents/${file}`;
 
 export const INITIAL_DOCUMENTS = [
   {
     id: 'aadhaar',
+    numberBadge: 1,
     title: 'Aadhaar Card',
     category: 'Identity',
     docNumber: '6431 7055 4663',
@@ -15,10 +16,10 @@ export const INITIAL_DOCUMENTS = [
     issueDate: '16/07/2021',
     expiryDate: 'Lifetime Validity',
     badge: 'National ID',
-    status: 'Verified',
+    status: 'Uploaded',
     address: '204, VILL-SHERALIPUR, Lamajuar, PO: Lamajuar, DIST: Sribhumi, Assam - 788701',
-    image: docImg('aadhaar_front.jpg'),
-    backImage: docImg('aadhaar_back.jpg'),
+    image: docImg('aadhaar_front.webp'),
+    backImage: docImg('aadhaar_back.webp'),
     notes: 'Official UIDAI Aadhaar card with online QR verification code and Virtual ID (VID).',
     tags: ['Aadhaar', 'UIDAI', 'National ID', 'KYC', 'Official'],
     keyFields: [
@@ -26,13 +27,13 @@ export const INITIAL_DOCUMENTS = [
       { label: 'Virtual ID (VID)', value: '9194 1580 2705 4659', copyable: true },
       { label: 'Date of Birth', value: '01/01/1999', copyable: true },
       { label: 'Gender', value: 'Male' },
-      { label: 'Issue Date', value: '16/07/2021' },
       { label: 'Permanent Address', value: '204, VILL-SHERALIPUR, Lamajuar, PO: Lamajuar, DIST: Sribhumi, Assam - 788701', copyable: true }
     ]
   },
   {
     id: 'pan',
-    title: 'Permanent Account Number (PAN)',
+    numberBadge: 2,
+    title: 'PAN Card',
     category: 'Identity',
     docNumber: 'DJKPA4828J',
     holderName: 'ASHRAF AHMED',
@@ -42,8 +43,8 @@ export const INITIAL_DOCUMENTS = [
     issueDate: '09/03/2026',
     expiryDate: 'Lifetime Validity',
     badge: 'Tax & Banking ID',
-    status: 'Verified',
-    image: docImg('pan_card.jpg'),
+    status: 'Uploaded',
+    image: docImg('pan_card.webp'),
     notes: 'Primary Tax & Banking Identification card issued by Income Tax Department.',
     tags: ['PAN', 'Tax', 'Income Tax', 'KYC', 'Finance'],
     keyFields: [
@@ -54,34 +55,9 @@ export const INITIAL_DOCUMENTS = [
     ]
   },
   {
-    id: 'voter-id',
-    title: 'Election Commission Voter ID (e-EPIC)',
-    category: 'Identity',
-    docNumber: 'GQF0193532',
-    holderName: 'Ashraf Ahmed',
-    fatherName: 'Md Safiqur Rahman',
-    dob: '01-01-1999',
-    issuer: 'Election Commission of India',
-    issueDate: '15-05-2026',
-    expiryDate: 'Lifetime Validity',
-    badge: 'Electoral ID',
-    status: 'Verified',
-    address: '204, Sheralipur (Blk-1 & 2), Badarpur, Bhanga Bazar, District - Sribhumi, Assam - 788701',
-    image: docImg('voter_id.jpg'),
-    notes: 'Assembly Constituency 123 - Karimganj North, Polling Station 634 NO.SHERALIPUR L.P. SCHOOL.',
-    tags: ['Voter ID', 'EPIC', 'Election Commission', 'Constituency 123'],
-    keyFields: [
-      { label: 'EPIC Number', value: 'GQF0193532', copyable: true, highlight: true },
-      { label: 'Assembly Constituency', value: '123-KARIMGANJ NORTH' },
-      { label: 'Polling Station', value: '634 NO.SHERALIPUR L.P. SCHOOL' },
-      { label: 'Serial No', value: '631', copyable: true },
-      { label: 'Download Date', value: '15-05-2026' },
-      { label: 'Registered Address', value: '204, Sheralipur, Badarpur, Sribhumi, Assam - 788701', copyable: true }
-    ]
-  },
-  {
     id: 'driving-licence',
-    title: 'Maharashtra State Motor Driving Licence',
+    numberBadge: 3,
+    title: 'Driving Licence',
     category: 'Licence',
     docNumber: 'MH12 20220062042',
     holderName: 'ASHRAF AHMED',
@@ -91,114 +67,47 @@ export const INITIAL_DOCUMENTS = [
     issueDate: '22-07-2022',
     expiryDate: '31-12-2038',
     badge: 'Valid till 2038',
-    status: 'Verified',
+    status: 'Uploaded',
     address: 'GAT NO 983/3B PUNE NAGAR RD NR MALTHAN PHATA, Shikrapur, Shirur, Pune, MH, PIN: 412208',
-    image: docImg('driving_licence.jpg'),
+    image: docImg('driving_licence.webp'),
     notes: 'Smart Card Motor Driving Licence for Motorcycle with Gear (MCWG). RTO MH12 Pune.',
     tags: ['Driving Licence', 'Transport', 'MH12 Pune', 'Smart Card', 'MCWG'],
     keyFields: [
       { label: 'DL Number', value: 'MH12 20220062042', copyable: true, highlight: true },
       { label: 'Class of Vehicle', value: 'MCWG (Motor Cycle With Gear)' },
-      { label: 'Date of Issue', value: '22-07-2022' },
       { label: 'Valid Until', value: '31-12-2038 (NT)', highlight: true },
-      { label: 'Issuing Authority', value: 'MH12 (Pune, Maharashtra)' },
-      { label: 'Registered Address', value: 'Shikrapur, Shirur, Pune, MH - 412208', copyable: true }
+      { label: 'Issuing Authority', value: 'MH12 (Pune, Maharashtra)' }
     ]
   },
   {
-    id: 'hdfc-account',
-    title: 'HDFC Bank Account & Passbook',
-    category: 'Banking',
-    docNumber: '50100552781561',
-    holderName: 'ASHRAF AHMED',
-    issuer: 'HDFC Bank Ltd — Shikrapur Branch',
-    issueDate: '30/08/2022',
-    expiryDate: 'Active Account',
-    badge: 'Savings Account',
-    status: 'Verified',
-    image: docImg('bank_passbook.jpg'),
-    notes: 'Primary HDFC Savings Bank account at Shikrapur Branch (Code 2872), Tal Shirur, Dist Pune.',
-    tags: ['Bank', 'HDFC Bank', 'Passbook', 'IFSC', 'Finance'],
-    keyFields: [
-      { label: 'Account Number', value: '50100552781561', copyable: true, highlight: true },
-      { label: 'IFSC Code', value: 'HDFC0002872', copyable: true, highlight: true },
-      { label: 'Customer ID', value: '205199504', copyable: true },
-      { label: 'Branch Name', value: 'SHIKRAPUR [Code: 2872]' },
-      { label: 'MICR Code', value: '411240047', copyable: true },
-      { label: 'Account Product', value: '1045 - SB FARMERS' },
-      { label: 'Registered Mobile', value: '917066203759', copyable: true },
-      { label: 'Branch Address', value: 'GAT NO 2603, Pune Nagar Road, Shikrapur, Pune - 412208' }
-    ]
-  },
-  {
-    id: 'hdfc-debit-card',
-    title: 'HDFC Bank MoneyBack Debit Card',
-    category: 'Banking',
-    docNumber: '4191 8802 3171 1157',
+    id: 'voter-id',
+    numberBadge: 4,
+    title: 'Voter ID',
+    category: 'Identity',
+    docNumber: 'GQF0193532',
     holderName: 'Ashraf Ahmed',
-    issuer: 'HDFC Bank / VISA Platinum',
-    issueDate: '08/2022',
-    expiryDate: '08/27',
-    badge: 'VISA Platinum',
-    status: 'Active',
-    image: docImg('hdfc_debit_card.jpg'),
-    notes: 'HDFC MoneyBack Contactless Chip Debit Card linked to primary savings account.',
-    tags: ['Debit Card', 'HDFC', 'Visa', 'Card', 'Banking'],
+    fatherName: 'Md Safiqur Rahman',
+    dob: '01-01-1999',
+    issuer: 'Election Commission of India',
+    issueDate: '15-05-2026',
+    expiryDate: 'Lifetime Validity',
+    badge: 'Electoral ID',
+    status: 'Uploaded',
+    address: '204, Sheralipur (Blk-1 & 2), Badarpur, Bhanga Bazar, District - Sribhumi, Assam - 788701',
+    image: docImg('voter_id.webp'),
+    notes: 'Assembly Constituency 123 - Karimganj North, Polling Station 634 NO.SHERALIPUR L.P. SCHOOL.',
+    tags: ['Voter ID', 'EPIC', 'Election Commission', 'Constituency 123'],
     keyFields: [
-      { label: 'Card Number', value: '4191 8802 3171 1157', copyable: true, maskable: true, highlight: true },
-      { label: 'Valid Thru', value: '08/27', copyable: true },
-      { label: 'Card Ref No', value: '28720010022000001247' },
-      { label: 'Card Network', value: 'VISA Platinum Contactless' }
-    ]
-  },
-  {
-    id: 'discover-pulse-card',
-    title: 'Discover / Pulse Payment Card',
-    category: 'Banking',
-    docNumber: '3615 730149 0666',
-    holderName: 'Ashraf Ahmed',
-    issuer: 'Discover / Pulse Network',
-    issueDate: '11/2025',
-    expiryDate: '11/30',
-    badge: 'Discover / Pulse',
-    status: 'Active',
-    image: docImg('discover_card.jpg'),
-    notes: 'Discover / Pulse network payment card. Valid thru Nov 2030.',
-    tags: ['Payment Card', 'Discover', 'Pulse', 'Financial'],
-    keyFields: [
-      { label: 'Card Number', value: '3615 730149 0666', copyable: true, maskable: true },
-      { label: 'Valid Thru', value: '11/30', copyable: true },
-      { label: 'CVV Security Code', value: '257', copyable: true, sensitive: true },
-      { label: 'Network Support', value: 'Discover / Pulse 24/7' }
-    ]
-  },
-  {
-    id: 'marriage-certificate',
-    title: 'Muslim Marriage Certificate (Nikahnama)',
-    category: 'Certificates',
-    docNumber: 'MMR/SKB/C-572/2022',
-    holderName: 'Ashraf Ahmed & Sajida Sultana',
-    issuer: 'Govt. of Assam — Muslim Marriage Registrar (Quazi), Karimganj',
-    issueDate: '16/12/2022',
-    expiryDate: 'Permanent Legal Record',
-    badge: 'Legal Marriage Record',
-    status: 'Verified',
-    image: docImg('marriage_certificate.jpg'),
-    notes: 'Solemnized on 07/12/2022. Registered in Office of Muslim Marriage Registrar under Mahamadan Law (Shariat Act).',
-    tags: ['Marriage', 'Nikahnama', 'Govt of Assam', 'Legal Record', 'Quazi'],
-    keyFields: [
-      { label: 'Ref Number', value: 'MMR/SKB/C-572/2022', copyable: true, highlight: true },
-      { label: 'Register Serial No', value: '1339 of 2022', copyable: true },
-      { label: 'Groom', value: 'Ashraf Ahmed s/o Safiqur Rahman' },
-      { label: 'Bride', value: 'Sajida Sultana d/o Maulana Abdul Gani' },
-      { label: 'Solemnised Date', value: '07/12/2022' },
-      { label: 'Registration Date', value: '16/12/2022' },
-      { label: 'Jurisdiction', value: 'South Block, Dist Karimganj, Assam' }
+      { label: 'EPIC Number', value: 'GQF0193532', copyable: true, highlight: true },
+      { label: 'Assembly Constituency', value: '123-KARIMGANJ NORTH' },
+      { label: 'Polling Station', value: '634 NO.SHERALIPUR L.P. SCHOOL' },
+      { label: 'Serial No', value: '631', copyable: true }
     ]
   },
   {
     id: 'identification-certificate',
-    title: 'Lamajuar Gaon Panchayat Identification Certificate',
+    numberBadge: 5,
+    title: 'Passport / Verification',
     category: 'Certificates',
     docNumber: 'Memo LGP / Sl. No. 34',
     holderName: 'Ashraf Ahmed',
@@ -207,50 +116,42 @@ export const INITIAL_DOCUMENTS = [
     issueDate: '29/09/2026',
     expiryDate: 'Official Certificate',
     badge: 'Passport Verification',
-    status: 'Verified',
-    image: docImg('identification_certificate.jpg'),
+    status: 'Uploaded',
+    image: docImg('identification_certificate.webp'),
     notes: 'Official residence & identification certificate issued for the purpose of Applying for Passport. Holding No. 193.',
-    tags: ['Panchayat', 'Passport Document', 'Identification', 'Govt of Assam'],
+    tags: ['Passport', 'Panchayat', 'Verification', 'Assam'],
     keyFields: [
       { label: 'Certificate Sl. No', value: '34 (Memo LGP)', copyable: true, highlight: true },
       { label: 'Holding Number', value: '193', copyable: true },
-      { label: 'Issued For Purpose', value: 'Applying for Passport', highlight: true },
-      { label: 'Date of Issue', value: '29/09/2026' },
-      { label: 'Residence Details', value: 'Village Sheralipur, P.O. Lamajuar, P.S. Badarpur, Dist Sribhumi' },
-      { label: 'Signatories', value: 'President & Secretary, 9 No. Lamajuar G.P.' }
+      { label: 'Issued For Purpose', value: 'Applying for Passport', highlight: true }
     ]
   },
   {
-    id: 'school-leaving-certificate',
-    title: 'Janakalyan School Leaving / Transfer Certificate',
-    category: 'Education',
-    docNumber: 'No. 45/26',
-    holderName: 'ASHRAF AHMED',
-    fatherName: 'MD SAFIQUR RAHMAN',
-    motherName: 'MARIAM BEGUM',
-    dob: '01/01/1999',
-    issuer: 'Office of Headmaster, Janakalyan M. E. School, Sheralipur',
-    issueDate: '28/09/2026',
-    expiryDate: 'Permanent Academic Record',
-    badge: 'Academic TC',
-    status: 'Verified',
-    image: docImg('school_leaving_certificate.jpg'),
-    notes: 'Official Transfer / School Leaving Certificate. Completed Class VIII on 31/12/2011. Character: Good.',
-    tags: ['Education', 'School Leaving', 'Transfer Certificate', 'TC', 'School'],
+    id: 'marriage-certificate',
+    numberBadge: 6,
+    title: 'Marriage Certificate',
+    category: 'Certificates',
+    docNumber: 'MMR/SKB/C-572/2022',
+    holderName: 'Ashraf Ahmed & Sajida Sultana',
+    issuer: 'Govt. of Assam — Muslim Marriage Registrar (Quazi), Karimganj',
+    issueDate: '16/12/2022',
+    expiryDate: 'Permanent Legal Record',
+    badge: 'Nikahnama',
+    status: 'Uploaded',
+    image: docImg('marriage_certificate.webp'),
+    notes: 'Solemnized on 07/12/2022. Registered in Office of Muslim Marriage Registrar under Mahamadan Law (Shariat Act).',
+    tags: ['Marriage', 'Nikahnama', 'Govt of Assam', 'Legal Record'],
     keyFields: [
-      { label: 'Certificate No', value: '45/26', copyable: true, highlight: true },
-      { label: 'School Name', value: 'Janakalyan M. E. School (Provincialised)' },
-      { label: 'Date of Birth (in Register)', value: '01/01/1999', copyable: true },
-      { label: 'Mother Name', value: 'MARIAM BEGUM' },
-      { label: 'Father Name', value: 'MD SAFIQUR RAHMAN' },
-      { label: 'Class Completed', value: 'Class VIII (Eight)' },
-      { label: 'Date Left School', value: '31/12/2011' },
-      { label: 'Conduct & Character', value: 'Good' }
+      { label: 'Ref Number', value: 'MMR/SKB/C-572/2022', copyable: true, highlight: true },
+      { label: 'Register Serial No', value: '1339 of 2022', copyable: true },
+      { label: 'Groom', value: 'Ashraf Ahmed s/o Safiqur Rahman' },
+      { label: 'Bride', value: 'Sajida Sultana d/o Maulana Abdul Gani' }
     ]
   },
   {
     id: 'hifz-certificate',
-    title: 'Sanad Takmeel Hifz-ul-Quran (Quran Graduation Certificate)',
+    numberBadge: 7,
+    title: 'Education Certificate',
     category: 'Education',
     docNumber: 'No. 6745/56',
     holderName: 'Hafiz Mohammad Ashraf Ahmed',
@@ -258,18 +159,104 @@ export const INITIAL_DOCUMENTS = [
     issuer: 'Jamia Islamia Ishaatul Uloom Akkalkuwa, Maharashtra',
     issueDate: '31/05/2015',
     expiryDate: 'Lifetime Honor',
-    badge: 'Sanad / Distinction',
-    status: 'Verified',
-    image: docImg('hifz_certificate.jpg'),
+    badge: 'Sanad Distinction',
+    status: 'Uploaded',
+    image: docImg('hifz_certificate.webp'),
     notes: 'Completed complete memorization of the Holy Quran (Hifz) with distinction (Aala grade) at Jamia Islamia Ishaatul Uloom Akkalkuwa.',
     tags: ['Hifz', 'Sanad', 'Islamic Certificate', 'Akkalkuwa', 'Honor'],
     keyFields: [
       { label: 'Sanad Number', value: '6745/56', copyable: true, highlight: true },
       { label: 'Honorific', value: 'Hafiz Mohammad Ashraf Ahmed' },
-      { label: 'Institution', value: 'Jamia Islamia Ishaatul Uloom Akkalkuwa, Nandurbar, Maharashtra' },
-      { label: 'Date (Hijri & Gregorian)', value: '12 Shaban 1436 H / 31-05-2015' },
-      { label: 'Graduation Result', value: 'Aala (Distinction / First Class)', highlight: true },
-      { label: 'Origin Village', value: 'Sheralipur, Dist Karimganj, Assam' }
+      { label: 'Institution', value: 'Jamia Islamia Ishaatul Uloom Akkalkuwa' },
+      { label: 'Result', value: 'Aala (Distinction / First Class)', highlight: true }
+    ]
+  },
+  {
+    id: 'hdfc-account',
+    numberBadge: 8,
+    title: 'Bank Passbook',
+    category: 'Banking',
+    docNumber: '50100552781561',
+    holderName: 'ASHRAF AHMED',
+    issuer: 'HDFC Bank Ltd — Shikrapur Branch',
+    issueDate: '30/08/2022',
+    expiryDate: 'Active Account',
+    badge: 'HDFC Savings',
+    status: 'Uploaded',
+    image: docImg('bank_passbook.webp'),
+    notes: 'Primary HDFC Savings Bank account at Shikrapur Branch (Code 2872), Tal Shirur, Dist Pune.',
+    tags: ['Bank', 'HDFC Bank', 'Passbook', 'IFSC', 'Finance'],
+    keyFields: [
+      { label: 'Account Number', value: '50100552781561', copyable: true, highlight: true },
+      { label: 'IFSC Code', value: 'HDFC0002872', copyable: true, highlight: true },
+      { label: 'Customer ID', value: '205199504', copyable: true },
+      { label: 'Branch Name', value: 'SHIKRAPUR [Code: 2872]' }
+    ]
+  },
+  {
+    id: 'hdfc-debit-card',
+    numberBadge: 9,
+    title: 'Debit Card (HDFC)',
+    category: 'Banking',
+    docNumber: '4191 8802 3171 1157',
+    holderName: 'Ashraf Ahmed',
+    issuer: 'HDFC Bank / VISA Platinum',
+    issueDate: '08/2022',
+    expiryDate: '08/27',
+    badge: 'VISA Platinum',
+    status: 'Uploaded',
+    image: docImg('hdfc_debit_card.webp'),
+    notes: 'HDFC MoneyBack Contactless Chip Debit Card linked to primary savings account.',
+    tags: ['Debit Card', 'HDFC', 'Visa', 'Card', 'Banking'],
+    keyFields: [
+      { label: 'Card Number', value: '4191 8802 3171 1157', copyable: true, maskable: true, highlight: true },
+      { label: 'Valid Thru', value: '08/27', copyable: true },
+      { label: 'Card Network', value: 'VISA Platinum Contactless' }
+    ]
+  },
+  {
+    id: 'discover-pulse-card',
+    numberBadge: 10,
+    title: 'Discover / Pulse Card',
+    category: 'Banking',
+    docNumber: '3615 730149 0666',
+    holderName: 'Ashraf Ahmed',
+    issuer: 'Discover / Pulse Network',
+    issueDate: '11/2025',
+    expiryDate: '11/30',
+    badge: 'Pulse / Discover',
+    status: 'Uploaded',
+    image: docImg('discover_card.webp'),
+    notes: 'Discover / Pulse network payment card. Valid thru Nov 2030.',
+    tags: ['Payment Card', 'Discover', 'Pulse', 'Financial'],
+    keyFields: [
+      { label: 'Card Number', value: '3615 730149 0666', copyable: true, maskable: true },
+      { label: 'Valid Thru', value: '11/30', copyable: true },
+      { label: 'CVV Security Code', value: '257', copyable: true, sensitive: true }
+    ]
+  },
+  {
+    id: 'school-leaving-certificate',
+    numberBadge: 11,
+    title: 'School TC Certificate',
+    category: 'Education',
+    docNumber: 'No. 45/26',
+    holderName: 'ASHRAF AHMED',
+    fatherName: 'MD SAFIQUR RAHMAN',
+    motherName: 'MARIAM BEGUM',
+    dob: '01/01/1999',
+    issuer: 'Office of Headmaster, Janakalyan M. E. School',
+    issueDate: '28/09/2026',
+    expiryDate: 'Permanent Record',
+    badge: 'School TC',
+    status: 'Uploaded',
+    image: docImg('school_leaving_certificate.webp'),
+    notes: 'Transfer / School Leaving Certificate. Completed Class VIII on 31/12/2011.',
+    tags: ['School', 'TC', 'Janakalyan', 'Academic'],
+    keyFields: [
+      { label: 'Certificate No', value: '45/26', copyable: true },
+      { label: 'Mother Name', value: 'MARIAM BEGUM' },
+      { label: 'Father Name', value: 'MD SAFIQUR RAHMAN' }
     ]
   }
 ];
@@ -277,6 +264,7 @@ export const INITIAL_DOCUMENTS = [
 export const PROFILE_INFO = {
   fullName: 'Ashraf Ahmed',
   honorific: 'Hafiz Mohammad Ashraf Ahmed',
+  greetingName: 'Tausif & Ashraf',
   dob: '01 January 1999',
   gender: 'Male',
   fatherName: 'Md. Safiqur Rahman',
@@ -295,11 +283,25 @@ export const PROFILE_INFO = {
   ]
 };
 
-export const CATEGORIES = [
-  { id: 'all', label: 'All Documents', icon: 'FolderArchive' },
-  { id: 'Identity', label: 'Identity & Legal', icon: 'UserCheck' },
-  { id: 'Banking', label: 'Banking & Finance', icon: 'CreditCard' },
-  { id: 'Licence', label: 'Licences & Transport', icon: 'Car' },
-  { id: 'Education', label: 'Education & Hifz', icon: 'GraduationCap' },
-  { id: 'Certificates', label: 'Official Certificates', icon: 'Award' }
+export const QUICK_TIPS = [
+  {
+    icon: 'Smartphone',
+    title: 'Always keep these images updated',
+    desc: 'Take clear photos with readable numbers and dates.'
+  },
+  {
+    icon: 'Cloud',
+    title: 'Store backup in cloud (Supabase / Drive)',
+    desc: 'Sync encrypted WebP scans to lifetime cloud storage.'
+  },
+  {
+    icon: 'Lock',
+    title: 'Keep your device password protected',
+    desc: 'Lock this vault with PIN to protect sensitive cards.'
+  },
+  {
+    icon: 'ShieldCheck',
+    title: 'Useful during verification, travel or emergencies',
+    desc: 'Instant 1-click copy when filling official forms.'
+  }
 ];

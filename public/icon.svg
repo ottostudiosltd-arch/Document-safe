@@ -1,23 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="vaultGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0284c7" />
-      <stop offset="100%" stop-color="#0f172a" />
-    </linearGradient>
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#0284c7" />
+    <linearGradient id="warmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A66363" />
+      <stop offset="100%" stop-color="#743E3E" />
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="108" fill="url(#vaultGrad)" />
-  <!-- Shield outline -->
-  <path d="M256 90 L380 140 C380 260 256 390 256 422 C256 390 132 260 132 140 Z" fill="none" stroke="url(#shieldGrad)" stroke-width="24" stroke-linejoin="round" />
-  <!-- Document inside -->
-  <rect x="200" y="180" width="112" height="150" rx="12" fill="#ffffff" fill-opacity="0.95" />
-  <line x1="225" y1="220" x2="287" y2="220" stroke="#0284c7" stroke-width="8" stroke-linecap="round" />
-  <line x1="225" y1="250" x2="287" y2="250" stroke="#94a3b8" stroke-width="8" stroke-linecap="round" />
-  <line x1="225" y1="280" x2="265" y2="280" stroke="#94a3b8" stroke-width="8" stroke-linecap="round" />
-  <!-- Checkmark / Lock icon -->
-  <circle cx="295" cy="315" r="28" fill="#10b981" />
-  <path d="M285 315 L292 322 L306 308" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <rect width="512" height="512" rx="112" fill="url(#warmBg)" />
+  <!-- Folder shape -->
+  <path d="M110 390 L110 180 C110 160 125 145 145 145 L215 145 L245 180 L367 180 C387 180 402 195 402 215 L402 390 C402 410 387 425 367 425 L145 425 C125 425 110 410 110 390 Z" fill="#FFFFFF" fill-opacity="0.95" />
+  <!-- Lock keyhole badge in center -->
+  <circle cx="256" cy="305" r="42" fill="#8D5050" />
+  <circle cx="256" cy="295" r="10" fill="#FFFFFF" />
+  <path d="M251 298 L261 298 L264 322 L248 322 Z" fill="#FFFFFF" />
 </svg>

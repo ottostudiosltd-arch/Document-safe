@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Copy, Check, ShieldCheck, User, CreditCard, MapPin, Award, FileText } from 'lucide-react';
+import { X, Copy, ShieldCheck, User, CreditCard, MapPin, Award } from 'lucide-react';
 import { PROFILE_INFO } from '../data/documents';
 
 export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
@@ -8,7 +8,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
   const sections = [
     {
       title: 'Identity & Government Numbers',
-      icon: <ShieldCheck className="w-4 h-4 text-brand-400" />,
+      icon: <ShieldCheck className="w-4 h-4 text-[#8D5050]" />,
       items: [
         { label: 'Aadhaar Number', value: '6431 7055 4663' },
         { label: 'Aadhaar Virtual ID (VID)', value: '9194 1580 2705 4659' },
@@ -19,7 +19,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
     },
     {
       title: 'Banking & Financial Details',
-      icon: <CreditCard className="w-4 h-4 text-emerald-400" />,
+      icon: <CreditCard className="w-4 h-4 text-[#8D5050]" />,
       items: [
         { label: 'HDFC Bank Account Number', value: '50100552781561' },
         { label: 'HDFC IFSC Code', value: 'HDFC0002872' },
@@ -31,7 +31,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
     },
     {
       title: 'Personal & Family Information',
-      icon: <User className="w-4 h-4 text-purple-400" />,
+      icon: <User className="w-4 h-4 text-[#8D5050]" />,
       items: [
         { label: 'Full Legal Name', value: 'ASHRAF AHMED' },
         { label: 'Honorific Title', value: 'Hafiz Mohammad Ashraf Ahmed' },
@@ -45,7 +45,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
     },
     {
       title: 'Official Addresses',
-      icon: <MapPin className="w-4 h-4 text-rose-400" />,
+      icon: <MapPin className="w-4 h-4 text-[#8D5050]" />,
       items: [
         { 
           label: 'Permanent Address (Assam)', 
@@ -59,7 +59,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
     },
     {
       title: 'Certificate Reference Numbers',
-      icon: <Award className="w-4 h-4 text-amber-400" />,
+      icon: <Award className="w-4 h-4 text-[#8D5050]" />,
       items: [
         { label: 'Marriage Certificate Ref', value: 'MMR/SKB/C-572/2022 (Serial 1339)' },
         { label: 'Panchayat Identification Sl.', value: 'Memo LGP Sl. No. 34 (Holding 193)' },
@@ -70,23 +70,23 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden max-h-[88vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#2E221D]/75 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-[#FFFFFF] border border-[#EADFD7] rounded-3xl shadow-2xl overflow-hidden max-h-[88vh] flex flex-col">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-850 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#EADFD7] bg-[#FBF8F5] shrink-0">
           <div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <Copy className="w-5 h-5 text-brand-400" />
+            <h2 className="text-base sm:text-lg font-bold text-[#3E2F28] flex items-center gap-2">
+              <Copy className="w-5 h-5 text-[#8D5050]" />
               Quick Copy Cheat-Sheet
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-[#7A665A] mt-0.5">
               1-Click instant copy for KYC, online forms, visa & banking portals
             </p>
           </div>
           <button 
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+            className="p-1.5 rounded-xl text-[#7A665A] hover:text-[#3E2F28] hover:bg-[#F5ECE5]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -96,7 +96,7 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
         <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
           {sections.map((sec, secIdx) => (
             <div key={secIdx} className="space-y-2.5">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#7A665A] flex items-center gap-2">
                 {sec.icon}
                 <span>{sec.title}</span>
               </h3>
@@ -105,20 +105,20 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
                 {sec.items.map((item, itemIdx) => (
                   <div
                     key={itemIdx}
-                    className="p-2.5 sm:p-3 rounded-xl bg-slate-800/80 hover:bg-slate-750 border border-slate-700/70 hover:border-brand-500/40 flex items-center justify-between gap-3 transition-colors"
+                    className="p-2.5 sm:p-3 rounded-2xl bg-[#FDFBF9] hover:bg-[#FBF8F5] border border-[#EADFD7] hover:border-[#D5A7A7] flex items-center justify-between gap-3 transition-colors"
                   >
                     <div className="min-w-0 flex-1">
-                      <span className="text-[11px] text-slate-400 block font-medium">
+                      <span className="text-[11px] text-[#A8978B] block font-medium">
                         {item.label}
                       </span>
-                      <span className="text-xs sm:text-sm font-semibold font-mono text-slate-100 block truncate mt-0.5 select-all">
+                      <span className="text-xs sm:text-sm font-bold font-mono text-[#3E2F28] block truncate mt-0.5 select-all">
                         {item.value}
                       </span>
                     </div>
 
                     <button
                       onClick={() => onCopy(item.value, item.label)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600/90 hover:bg-brand-500 text-white transition-all shadow-sm shrink-0 active:scale-95"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#8D5050] hover:bg-[#743E3E] text-white transition-all shadow-warm-sm shrink-0 active:scale-95"
                       title={`Copy ${item.label}`}
                     >
                       <Copy className="w-3.5 h-3.5" />
@@ -132,11 +132,11 @@ export default function QuickCopyModal({ isOpen, onClose, onCopy }) {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-slate-800 bg-slate-850 flex items-center justify-between text-xs text-slate-400 shrink-0">
-          <span>Encrypted Local Vault • All data verified</span>
+        <div className="p-4 border-t border-[#EADFD7] bg-[#FBF8F5] flex items-center justify-between text-xs text-[#7A665A] shrink-0">
+          <span>Protected Local Vault • All data verified</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition-colors"
+            className="px-4 py-1.5 rounded-xl bg-[#8D5050] hover:bg-[#743E3E] text-white font-bold transition-colors"
           >
             Done
           </button>
