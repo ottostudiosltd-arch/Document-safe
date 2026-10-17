@@ -135,6 +135,12 @@ export default function DocumentModal({ doc, onClose, onCopy }) {
                 <img 
                   src={currentImage} 
                   alt={doc.title} 
+                  onError={(e) => {
+                    const fallback = showBack && doc.backFallbackSvg ? doc.backFallbackSvg : doc.fallbackSvg;
+                    if (fallback && e.target.src !== fallback) {
+                      e.target.src = fallback;
+                    }
+                  }}
                   className="max-h-[460px] w-auto max-w-full object-contain rounded-xl shadow-2xl select-none"
                   draggable={false}
                 />

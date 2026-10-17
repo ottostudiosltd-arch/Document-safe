@@ -278,6 +278,7 @@ export default function App() {
         onClose={() => setIsSettingsOpen(false)}
         onShowToast={showToast}
         onExportBackup={handleExportBackup}
+        onInstallPwa={handleInstallPwa}
       />
 
       {/* Toast Feedback */}

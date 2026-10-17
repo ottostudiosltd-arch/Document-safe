@@ -79,7 +79,7 @@ export default function TopHeader({
           {canInstallPwa && (
             <button
               onClick={onInstallPwa}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9] hover:bg-[#C8E6C9] transition-all"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9] hover:bg-[#C8E6C9] transition-all"
             >
               <Smartphone className="w-3.5 h-3.5" />
               <span>Install PWA</span>

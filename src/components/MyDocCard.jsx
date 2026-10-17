@@ -99,6 +99,12 @@ export default function MyDocCard({ doc, onSelectDoc, onCopy }) {
         <img
           src={activeImage}
           alt={doc.title}
+          onError={(e) => {
+            const fallback = showBack && doc.backFallbackSvg ? doc.backFallbackSvg : doc.fallbackSvg;
+            if (fallback && e.target.src !== fallback) {
+              e.target.src = fallback;
+            }
+          }}
           className="w-full h-full object-cover object-center rounded-xl group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />

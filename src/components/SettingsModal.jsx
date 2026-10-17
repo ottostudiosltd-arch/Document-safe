@@ -9,30 +9,15 @@ import {
   Check, 
   Lock,
   Download,
-  Upload
+  Upload,
+  Smartphone,
+  UserCheck,
+  ExternalLink
 } from 'lucide-react';
-import { getMasterPin, setMasterPin, SUPABASE_PROJECT_ID, SUPABASE_URL } from '../supabase';
+import { SUPABASE_PROJECT_ID, SUPABASE_URL, VAULT_ACCOUNT } from '../supabase';
 
-export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBackup }) {
+export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBackup, onInstallPwa }) {
   if (!isOpen) return null;
-
-  const [currentPin, setCurrentPinState] = useState(getMasterPin());
-  const [newPin, setNewPin] = useState('');
-  const [pinSuccess, setPinSuccess] = useState(false);
-
-  const handleSavePin = (e) => {
-    e.preventDefault();
-    if (newPin.length !== 4 || isNaN(newPin)) {
-      onShowToast('PIN must be exactly 4 digits (e.g. 1999)', 'error');
-      return;
-    }
-    setMasterPin(newPin);
-    setCurrentPinState(newPin);
-    setNewPin('');
-    setPinSuccess(true);
-    onShowToast('Vault PIN updated successfully!', 'success');
-    setTimeout(() => setPinSuccess(false), 2500);
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#2E221D]/75 backdrop-blur-md animate-in fade-in duration-200">
@@ -53,41 +38,58 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
         </div>
 
         {/* Body */}
-        <div className="p-6 overflow-y-auto space-y-6">
+        <div className="p-6 overflow-y-auto space-y-5">
           
-          {/* PIN Management Section */}
+          {/* Supabase Master Vault Account */}
           <div className="p-4 rounded-2xl bg-[#FDFBF9] border border-[#EADFD7] space-y-3">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#3E2F28]">
-              <KeyRound className="w-4 h-4 text-[#8D5050]" />
-              <span>Change 4-Digit Master PIN</span>
-            </div>
-            <p className="text-[11px] text-[#7A665A]">
-              Current Master PIN: <strong className="font-mono text-[#8D5050]">{currentPin}</strong>
-            </p>
-
-            <form onSubmit={handleSavePin} className="flex items-center gap-2 pt-1">
-              <input
-                type="password"
-                maxLength={4}
-                value={newPin}
-                onChange={(e) => setNewPin(e.target.value.replace(/\D/g, ''))}
-                placeholder="New 4-digit PIN"
-                className="w-36 px-3 py-1.5 text-xs bg-[#FFFFFF] border border-[#EADFD7] rounded-xl text-[#3E2F28] font-mono tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-[#8D5050]"
-              />
-              <button
-                type="submit"
-                className="flex items-center gap-1 px-4 py-1.5 rounded-xl text-xs font-bold bg-[#8D5050] hover:bg-[#743E3E] text-white shadow-warm-sm transition-all"
-              >
-                <Save className="w-3.5 h-3.5" />
-                <span>Save PIN</span>
-              </button>
-            </form>
-
-            {pinSuccess && (
-              <span className="text-[11px] text-emerald-600 font-bold block flex items-center gap-1">
-                <Check className="w-3.5 h-3.5" /> PIN successfully updated
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-[#3E2F28] flex items-center gap-2">
+                <UserCheck className="w-4 h-4 text-[#8D5050]" />
+                Ashraf Ahmed Vault Account
               </span>
-            )}
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E8F5E9] text-[#2E7D32]">
+                Active
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+              <div className="p-2.5 rounded-xl bg-white border border-[#EADFD7]">
+                <span className="text-[10px] text-[#A8978B] block font-semibold">Vault Username</span>
+                <span className="font-mono font-bold text-[#3E2F28]">{VAULT_ACCOUNT.username}</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-white border border-[#EADFD7]">
+                <span className="text-[10px] text-[#A8978B] block font-semibold">Supabase Registered Email</span>
+                <span className="font-mono font-bold text-[#3E2F28] truncate block" title={VAULT_ACCOUNT.email}>
+                  {VAULT_ACCOUNT.email}
+                </span>
+              </div>
+            </div>
+
+            <p className="text-[11px] text-[#7A665A] leading-relaxed">
+              Login is protected using Supabase Authentication. No document or ID is exposed on the lock screen.
+            </p>
+          </div>
+
+          {/* PWA Install Card */}
+          <div className="p-4 rounded-2xl bg-[#FBF8F5] border border-[#EADFD7] space-y-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-[#3E2F28] flex items-center gap-1.5">
+                <Smartphone className="w-4 h-4 text-[#8D5050]" />
+                Install as Mobile / Desktop App (PWA)
+              </span>
+            </div>
+            <p className="text-[11px] text-[#7A665A] leading-relaxed">
+              Install MyDocs directly to your phone's home screen or PC desktop for instant offline access and native app experience.
+            </p>
+            <div className="flex items-center gap-2 pt-1">
+              <button
+                onClick={onInstallPwa}
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#8D5050] hover:bg-[#743E3E] text-white shadow-warm-sm transition-all"
+              >
+                <Smartphone className="w-3.5 h-3.5" />
+                <span>Install MyDocs App</span>
+              </button>
+            </div>
           </div>
 
           {/* Supabase Free Tier Status Card */}
@@ -95,7 +97,7 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-[#743E3E] flex items-center gap-1.5">
                 <Cloud className="w-4 h-4 text-[#8D5050]" />
-                Supabase Lifetime Free-Tier Rules
+                Supabase Lifetime Free-Tier
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#E8F5E9] text-[#2E7D32]">
                 100% Compliant
@@ -108,8 +110,8 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
                 <span className="font-mono font-bold">{SUPABASE_PROJECT_ID}</span>
               </div>
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
-                <span className="text-[10px] text-[#A8978B] block font-medium">Region</span>
-                <span className="font-bold">ap-northeast-2</span>
+                <span className="text-[10px] text-[#A8978B] block font-medium">Storage Bucket</span>
+                <span className="font-mono font-bold">documents</span>
               </div>
               <div className="p-2 rounded-xl bg-white/70 border border-[#EBD4D4]">
                 <span className="text-[10px] text-[#A8978B] block font-medium">WebP Compression</span>
@@ -122,7 +124,7 @@ export default function SettingsModal({ isOpen, onClose, onShowToast, onExportBa
             </div>
 
             <p className="text-[10px] text-[#743E3E]/80 pt-1 leading-tight">
-              All documents are compressed to WebP (~12KB to 80KB each) to ensure you never exceed Supabase free tier limits.
+              All 12 documents are optimized to WebP (~12KB to 80KB each, total ~1.3MB) so your free quota will last indefinitely.
             </p>
           </div>
 

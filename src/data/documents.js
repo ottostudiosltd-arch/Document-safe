@@ -1,5 +1,9 @@
 const BASE = import.meta.env.BASE_URL || './';
-const docImg = (file) => `${BASE}documents/${file}`;
+const docSvg = (file) => `${BASE}documents/${file}`;
+
+// Supabase Storage Public Bucket URL
+export const SUPABASE_BUCKET_URL = 'https://bjoszpgpwobgfvwhbgng.supabase.co/storage/v1/object/public/documents';
+const supabaseDoc = (file) => `${SUPABASE_BUCKET_URL}/${file}`;
 
 export const INITIAL_DOCUMENTS = [
   {
@@ -19,7 +23,10 @@ export const INITIAL_DOCUMENTS = [
     badge: 'National ID',
     status: 'Uploaded',
     address: '204, VILL-SHERALIPUR, Lamajuar, PO: Lamajuar, DIST: Sribhumi, Assam - 788701',
-    image: docImg('aadhaar.svg'),
+    image: supabaseDoc('aadhaar_front.webp'),
+    fallbackSvg: docSvg('aadhaar.svg'),
+    backImage: supabaseDoc('aadhaar_back.webp'),
+    backFallbackSvg: docSvg('aadhaar.svg'),
     notes: 'Official UIDAI Aadhaar card with online QR verification code and Virtual ID (VID).',
     tags: ['Aadhaar', 'UIDAI', 'National ID', 'KYC', 'Official'],
     keyFields: [
@@ -45,7 +52,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Lifetime Validity',
     badge: 'Tax & Banking ID',
     status: 'Uploaded',
-    image: docImg('pan.svg'),
+    image: supabaseDoc('pan_card.webp'),
+    fallbackSvg: docSvg('pan.svg'),
     notes: 'Primary Tax & Banking Identification card issued by Income Tax Department.',
     tags: ['PAN', 'Tax', 'Income Tax', 'KYC', 'Finance'],
     keyFields: [
@@ -71,7 +79,8 @@ export const INITIAL_DOCUMENTS = [
     badge: 'Valid till 2038',
     status: 'Uploaded',
     address: 'GAT NO 983/3B PUNE NAGAR RD NR MALTHAN PHATA, Shikrapur, Shirur, Pune, MH, PIN: 412208',
-    image: docImg('driving_licence.svg'),
+    image: supabaseDoc('driving_licence.webp'),
+    fallbackSvg: docSvg('driving_licence.svg'),
     notes: 'Smart Card Motor Driving Licence for Motorcycle with Gear (MCWG). RTO MH12 Pune.',
     tags: ['Driving Licence', 'Transport', 'MH12 Pune', 'Smart Card', 'MCWG'],
     keyFields: [
@@ -97,7 +106,8 @@ export const INITIAL_DOCUMENTS = [
     badge: 'Electoral ID',
     status: 'Uploaded',
     address: '204, Sheralipur (Blk-1 & 2), Badarpur, Bhanga Bazar, District - Sribhumi, Assam - 788701',
-    image: docImg('voter_id.svg'),
+    image: supabaseDoc('voter_id.webp'),
+    fallbackSvg: docSvg('voter_id.svg'),
     notes: 'Assembly Constituency 123 - Karimganj North, Polling Station 634 NO.SHERALIPUR L.P. SCHOOL.',
     tags: ['Voter ID', 'EPIC', 'Election Commission', 'Constituency 123'],
     keyFields: [
@@ -121,7 +131,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Official Certificate',
     badge: 'Passport Verification',
     status: 'Uploaded',
-    image: docImg('passport.svg'),
+    image: supabaseDoc('identification_certificate.webp'),
+    fallbackSvg: docSvg('passport.svg'),
     notes: 'Official residence & identification certificate issued for the purpose of Applying for Passport. Holding No. 193.',
     tags: ['Passport', 'Panchayat', 'Verification', 'Assam'],
     keyFields: [
@@ -143,7 +154,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Permanent Legal Record',
     badge: 'Nikahnama',
     status: 'Uploaded',
-    image: docImg('marriage.svg'),
+    image: supabaseDoc('marriage_certificate.webp'),
+    fallbackSvg: docSvg('marriage.svg'),
     notes: 'Solemnized on 07/12/2022. Registered in Office of Muslim Marriage Registrar under Mahamadan Law (Shariat Act).',
     tags: ['Marriage', 'Nikahnama', 'Govt of Assam', 'Legal Record'],
     keyFields: [
@@ -167,7 +179,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Lifetime Honor',
     badge: 'Sanad Distinction',
     status: 'Uploaded',
-    image: docImg('hifz.svg'),
+    image: supabaseDoc('hifz_certificate.webp'),
+    fallbackSvg: docSvg('hifz.svg'),
     notes: 'Completed complete memorization of the Holy Quran (Hifz) with distinction (Aala grade) at Jamia Islamia Ishaatul Uloom Akkalkuwa.',
     tags: ['Hifz', 'Sanad', 'Islamic Certificate', 'Akkalkuwa', 'Honor'],
     keyFields: [
@@ -190,7 +203,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Active Account',
     badge: 'HDFC Savings',
     status: 'Uploaded',
-    image: docImg('passbook.svg'),
+    image: supabaseDoc('bank_passbook.webp'),
+    fallbackSvg: docSvg('passbook.svg'),
     notes: 'Primary HDFC Savings Bank account at Shikrapur Branch (Code 2872), Tal Shirur, Dist Pune.',
     tags: ['Bank', 'HDFC Bank', 'Passbook', 'IFSC', 'Finance'],
     keyFields: [
@@ -213,7 +227,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: '08/27',
     badge: 'VISA Platinum',
     status: 'Uploaded',
-    image: docImg('debit.svg'),
+    image: supabaseDoc('hdfc_debit_card.webp'),
+    fallbackSvg: docSvg('debit.svg'),
     notes: 'HDFC MoneyBack Contactless Chip Debit Card linked to primary savings account.',
     tags: ['Debit Card', 'HDFC', 'Visa', 'Card', 'Banking'],
     keyFields: [
@@ -235,7 +250,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: '11/30',
     badge: 'Pulse / Discover',
     status: 'Uploaded',
-    image: docImg('discover.svg'),
+    image: supabaseDoc('discover_card.webp'),
+    fallbackSvg: docSvg('discover.svg'),
     notes: 'Discover / Pulse network payment card. Valid thru Nov 2030.',
     tags: ['Payment Card', 'Discover', 'Pulse', 'Financial'],
     keyFields: [
@@ -260,7 +276,8 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Permanent Record',
     badge: 'School TC',
     status: 'Uploaded',
-    image: docImg('school.svg'),
+    image: supabaseDoc('school_leaving_certificate.webp'),
+    fallbackSvg: docSvg('school.svg'),
     notes: 'Transfer / School Leaving Certificate. Completed Class VIII on 31/12/2011.',
     tags: ['School', 'TC', 'Janakalyan', 'Academic'],
     keyFields: [
