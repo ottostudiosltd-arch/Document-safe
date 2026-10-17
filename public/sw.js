@@ -1,74 +1,57 @@
-const CACHE_NAME = 'docusafe-cache-v2';
+// DocuSafe Service Worker v3
+const CACHE_NAME = 'docusafe-v3';
 
 self.addEventListener('install', (event) => {
-  const scope = self.registration.scope;
-  const assetsToCache = [
-    scope,
-    scope + 'index.html',
-    scope + 'manifest.json',
-    scope + 'documents/aadhaar_front.jpg',
-    scope + 'documents/aadhaar_back.jpg',
-    scope + 'documents/pan_card.jpg',
-    scope + 'documents/voter_id.jpg',
-    scope + 'documents/driving_licence.jpg',
-    scope + 'documents/bank_passbook.jpg',
-    scope + 'documents/hdfc_debit_card.jpg',
-    scope + 'documents/discover_card.jpg',
-    scope + 'documents/marriage_certificate.jpg',
-    scope + 'documents/identification_certificate.jpg',
-    scope + 'documents/school_leaving_certificate.jpg',
-    scope + 'documents/hifz_certificate.jpg'
-  ];
-
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Caching core assets and documents with scope:', scope);
-      return cache.addAll(assetsToCache).catch(err => {
-        console.warn('[Service Worker] Non-critical cache error:', err);
-      });
-    })
-  );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log('[Service Worker] Clearing old cache:', cache);
-            return caches.delete(cache);
-          }
-        })
+        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
       );
     })
   );
   self.clients.claim();
 });
 
+// Network-first strategy with cache fallback
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+
+  // Don't intercept chrome-extension or external analytics
+  if (!url.protocol.startsWith('http')) return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
+    fetch(event.request)
+      .then((networkResponse) => {
+        // Cache valid responses
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, clone);
+          }).catch(() => {});
         }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
         return networkResponse;
-      }).catch(() => {
+      })
+      .catch(async () => {
+        // If offline / network error, return from cache
+        const cached = await caches.match(event.request);
+        if (cached) return cached;
+
+        // Fallback for HTML documents
         if (event.request.headers.get('accept')?.includes('text/html')) {
-          return caches.match(self.registration.scope + 'index.html');
+          const fallback = await caches.match('./') || await caches.match('./index.html');
+          if (fallback) return fallback;
         }
-      });
-    })
+
+        return new Response('Network error and not cached', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: new Headers({ 'Content-Type': 'text/plain' })
+        });
+      })
   );
 });
