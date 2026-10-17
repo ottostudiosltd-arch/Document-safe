@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Sidebar from './components/Sidebar';
 import TopHeader from './components/TopHeader';
+import PwaInstallBanner from './components/PwaInstallBanner';
 import GreetingHero from './components/GreetingHero';
 import MyDocCard from './components/MyDocCard';
 import QuickTipsSection from './components/QuickTipsSection';
@@ -8,7 +9,6 @@ import MobileBottomNav from './components/MobileBottomNav';
 import DocumentModal from './components/DocumentModal';
 import DocumentFormModal from './components/DocumentFormModal';
 import QuickCopyModal from './components/QuickCopyModal';
-import SettingsModal from './components/SettingsModal';
 import VaultSecurityLock from './components/VaultSecurityLock';
 import Toast from './components/Toast';
 import { INITIAL_DOCUMENTS } from './data/documents';
@@ -23,7 +23,6 @@ export default function App() {
   // Modals
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isQuickCopyOpen, setIsQuickCopyOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   // Security Lock state - Vault starts locked for security
   const [isLocked, setIsLocked] = useState(() => isVaultLocked());
@@ -38,9 +37,10 @@ export default function App() {
     }
   });
 
-  // PWA Install state
+  // PWA Install state & Top Banner
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [canInstallPwa, setCanInstallPwa] = useState(false);
+  const [isPwaBannerDismissed, setIsPwaBannerDismissed] = useState(false);
 
   // Toast
   const [toast, setToast] = useState(null);
@@ -57,22 +57,24 @@ export default function App() {
   }, []);
 
   const handleInstallPwa = async () => {
-    if (!deferredPrompt) {
-      showToast('To install: On Mobile tap "Share" > "Add to Home Screen". On Desktop click Install icon in address bar.', 'info');
-      return;
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        showToast('MyDocs installed successfully to your device!', 'success');
+        setCanInstallPwa(false);
+        setIsPwaBannerDismissed(true);
+      }
+      setDeferredPrompt(null);
+    } else {
+      // Instruction for Mobile & Desktop
+      showToast('To Install: On Chrome/Android, tap menu (⋮) > "Install app" or "Add to Home screen". On iPhone, tap Share > "Add to Home Screen".', 'info');
     }
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      showToast('MyDocs PWA installed successfully!', 'success');
-      setCanInstallPwa(false);
-    }
-    setDeferredPrompt(null);
   };
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
+    setTimeout(() => setToast(null), 3500);
   };
 
   const handleCopy = (text, label) => {
@@ -124,18 +126,6 @@ export default function App() {
     showToast(`Added "${newDoc.title}" to vault!`, 'success');
   };
 
-  const handleExportBackup = () => {
-    const allDocs = [...customDocs, ...INITIAL_DOCUMENTS];
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allDocs, null, 2));
-    const a = document.createElement('a');
-    a.href = dataStr;
-    a.download = `MyDocs_Backup_${new Date().toISOString().slice(0,10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    showToast('Vault backup file downloaded!', 'success');
-  };
-
   // Combine initial documents + custom documents
   const allDocuments = useMemo(() => {
     return [...INITIAL_DOCUMENTS, ...customDocs];
@@ -171,8 +161,7 @@ export default function App() {
       <Sidebar
         activeTab={activeTab}
         setActiveTab={(tab) => {
-          if (tab === 'settings') setIsSettingsOpen(true);
-          else if (tab === 'profile') setIsQuickCopyOpen(true);
+          if (tab === 'profile') setIsQuickCopyOpen(true);
           else setActiveTab(tab);
         }}
         onLockVault={handleLockVault}
@@ -192,19 +181,26 @@ export default function App() {
           onOpenQuickCopy={() => setIsQuickCopyOpen(true)}
           canInstallPwa={canInstallPwa}
           onInstallPwa={handleInstallPwa}
-          onToggleMobileMenu={() => setIsSettingsOpen(true)}
+          onToggleMobileMenu={() => setIsQuickCopyOpen(true)}
         />
 
         {/* Content Container */}
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
           
+          {/* Prominent PWA Install / Download Top Banner */}
+          <PwaInstallBanner
+            onInstall={handleInstallPwa}
+            isDismissed={isPwaBannerDismissed}
+            onDismiss={() => setIsPwaBannerDismissed(true)}
+          />
+
           {/* Greeting Hero */}
           <GreetingHero
             totalDocs={allDocuments.length}
             onOpenAddModal={() => setIsAddModalOpen(true)}
           />
 
-          {/* Document Cards Grid matching Image 2 */}
+          {/* Document Cards Grid */}
           {filteredDocuments.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
               {filteredDocuments.map((doc) => (
@@ -227,14 +223,14 @@ export default function App() {
               </p>
               <button
                 onClick={() => setSearchTerm('')}
-                className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#8D5050] text-white"
+                className="px-4 py-1.5 rounded-full text-xs font-bold bg-[#8D5050] text-white cursor-pointer"
               >
                 Clear Search
               </button>
             </div>
           )}
 
-          {/* Quick Access Tips Section matching Image 2 */}
+          {/* Quick Access Tips Section */}
           <QuickTipsSection />
 
         </main>
@@ -244,8 +240,7 @@ export default function App() {
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={(tab) => {
-          if (tab === 'settings') setIsSettingsOpen(true);
-          else setActiveTab(tab);
+          setActiveTab(tab);
         }}
         onOpenQuickCopy={() => setIsQuickCopyOpen(true)}
         onLockVault={handleLockVault}
@@ -270,15 +265,6 @@ export default function App() {
         isOpen={isQuickCopyOpen}
         onClose={() => setIsQuickCopyOpen(false)}
         onCopy={handleCopy}
-      />
-
-      {/* Settings Modal (PIN & Storage status) */}
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        onShowToast={showToast}
-        onExportBackup={handleExportBackup}
-        onInstallPwa={handleInstallPwa}
       />
 
       {/* Toast Feedback */}

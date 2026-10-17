@@ -3,14 +3,11 @@ import {
   FolderLock, 
   Files, 
   User, 
-  Settings, 
   HelpCircle, 
   ShieldCheck,
   Lock,
-  ExternalLink,
-  Cloud
+  Copy
 } from 'lucide-react';
-import { SUPABASE_PROJECT_ID } from '../supabase';
 
 export default function Sidebar({ 
   activeTab, 
@@ -20,9 +17,8 @@ export default function Sidebar({
 }) {
   const navItems = [
     { id: 'documents', label: 'My Documents', icon: Files },
-    { id: 'profile', label: 'Profile', icon: User },
-    { id: 'settings', label: 'Settings', icon: Settings },
-    { id: 'help', label: 'Help', icon: HelpCircle },
+    { id: 'profile', label: 'Ashraf Profile', icon: User },
+    { id: 'help', label: 'Guideline & Help', icon: HelpCircle },
   ];
 
   return (
@@ -47,7 +43,7 @@ export default function Sidebar({
               MyDocs
             </h1>
             <p className="text-[10px] text-[#7A665A] font-medium mt-1 leading-tight">
-              Your Important Documents<br/>Always Safe
+              Personal Document Locker<br/>for Ashraf Ahmed
             </p>
           </div>
         </div>
@@ -60,8 +56,14 @@ export default function Sidebar({
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all text-left ${
+                onClick={() => {
+                  if (item.id === 'profile' || item.id === 'help') {
+                    onOpenQuickCopy();
+                  } else {
+                    setActiveTab(item.id);
+                  }
+                }}
+                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all text-left cursor-pointer ${
                   isActive
                     ? 'bg-[#8D5050] text-white shadow-warm'
                     : 'text-[#6C584C] hover:bg-[#EBD4D4]/50 hover:text-[#3E2F28]'
@@ -74,49 +76,44 @@ export default function Sidebar({
           })}
         </nav>
 
-        {/* Cloud & Security Status */}
+        {/* Quick Actions */}
         <div className="mt-8 px-2 space-y-2">
           <button
             onClick={onOpenQuickCopy}
-            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-[#FBF8F5] border border-[#EADFD7] text-left text-xs font-semibold text-[#5C4A3E] transition-all shadow-warm-sm"
+            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-[#FBF8F5] border border-[#EADFD7] text-left text-xs font-semibold text-[#5C4A3E] transition-all shadow-warm-sm cursor-pointer"
           >
-            <span>Quick Copy Sheet</span>
+            <span className="flex items-center gap-2">
+              <Copy className="w-3.5 h-3.5 text-[#8D5050]" />
+              Quick Copy Sheet
+            </span>
             <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#8D5050]/10 text-[#8D5050] font-bold">1-Click</span>
           </button>
 
           <button
             onClick={onLockVault}
-            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-[#FDF6F6] border border-[#EADFD7] hover:border-[#D5A7A7] text-left text-xs font-semibold text-[#743E3E] transition-all shadow-warm-sm"
+            className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#FFFFFF] hover:bg-[#FDF6F6] border border-[#EADFD7] hover:border-[#D5A7A7] text-left text-xs font-semibold text-[#743E3E] transition-all shadow-warm-sm cursor-pointer"
           >
             <span className="flex items-center gap-1.5">
               <Lock className="w-3.5 h-3.5 text-[#8D5050]" />
               Lock Vault
             </span>
-            <span className="text-[10px] text-[#A8978B]">PIN</span>
+            <span className="text-[10px] text-[#A8978B]">Secure</span>
           </button>
         </div>
       </div>
 
-      {/* Bottom Security Card */}
+      {/* Bottom Clean Security Card */}
       <div className="relative z-10 pt-4">
         <div className="p-3.5 rounded-2xl bg-[#FFFFFF] border border-[#EADFD7] shadow-warm-sm">
-          <div className="flex items-center gap-2 mb-1.5">
+          <div className="flex items-center gap-2 mb-1">
             <div className="p-1 rounded-lg bg-[#E8F5E9] text-[#2E7D32]">
               <ShieldCheck className="w-4 h-4" />
             </div>
-            <span className="text-xs font-bold text-[#3E2F28]">Secure & Private</span>
+            <span className="text-xs font-bold text-[#3E2F28]">Encrypted Vault</span>
           </div>
           <p className="text-[11px] text-[#7A665A] leading-relaxed">
-            Your documents are stored safely and accessible anytime.
+            All 11 government documents are encrypted and protected.
           </p>
-          <div className="mt-2 pt-2 border-t border-[#F5ECE5] flex items-center justify-between text-[10px] text-[#A8978B]">
-            <span className="flex items-center gap-1">
-              <Cloud className="w-3 h-3 text-[#8D5050]" /> Cloud Vault
-            </span>
-            <span className="font-mono text-[9px] text-emerald-600 font-bold">
-              Synced
-            </span>
-          </div>
         </div>
       </div>
 

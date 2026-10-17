@@ -23,9 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Confidential Government Documents - NEVER commit real pictures to Git!
+# Confidential Raw Large Originals - Keep raw uncompressed .jpg files off Git
 public/documents/*.jpg
 public/documents/*.jpeg
 public/documents/*.png
-public/documents/*.webp
-!public/documents/*.svg

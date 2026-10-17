@@ -48,13 +48,27 @@ export default function DocumentModal({ doc, onClose, onCopy }) {
     setRotation(0);
   };
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = currentImage;
-    link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}_${showBack ? 'back' : 'front'}.webp`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(currentImage);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}_${showBack ? 'back' : 'front'}.webp`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      const link = document.createElement('a');
+      link.href = currentImage;
+      link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}_${showBack ? 'back' : 'front'}.webp`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   const handlePrint = () => {

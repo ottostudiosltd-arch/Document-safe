@@ -12,7 +12,6 @@ import {
   X,
   Copy
 } from 'lucide-react';
-import { PROFILE_INFO } from '../data/documents';
 
 export default function TopHeader({
   searchTerm,
@@ -36,7 +35,8 @@ export default function TopHeader({
         <div className="flex items-center gap-2.5 lg:hidden">
           <button 
             onClick={onToggleMobileMenu}
-            className="p-2 rounded-xl bg-[#F5ECE5] text-[#3E2F28] hover:bg-[#EADFD7] transition-colors"
+            className="p-2 rounded-xl bg-[#F5ECE5] text-[#3E2F28] hover:bg-[#EADFD7] transition-colors cursor-pointer"
+            title="Open Menu"
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -59,13 +59,13 @@ export default function TopHeader({
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={`Your ${totalDocs} important documents at one place (Search ID, name...)`}
+              placeholder={`Your ${totalDocs} documents at one place (Search ID, name...)`}
               className="w-full bg-transparent text-xs sm:text-sm text-[#3E2F28] placeholder-[#A8978B] focus:outline-none"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="text-[11px] font-bold text-[#A8978B] hover:text-[#3E2F28] ml-2"
+                className="text-[11px] font-bold text-[#A8978B] hover:text-[#3E2F28] ml-2 cursor-pointer"
               >
                 Clear
               </button>
@@ -76,20 +76,20 @@ export default function TopHeader({
         {/* Right Actions: Install PWA, Notification, Profile Dropdown */}
         <div className="flex items-center gap-2 sm:gap-3">
           
-          {canInstallPwa && (
-            <button
-              onClick={onInstallPwa}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9] hover:bg-[#C8E6C9] transition-all"
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-              <span>Install PWA</span>
-            </button>
-          )}
+          {/* Prominent Install PWA Button */}
+          <button
+            onClick={onInstallPwa}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9] hover:bg-[#C8E6C9] transition-all cursor-pointer shadow-warm-sm active:scale-95"
+            title="Install App"
+          >
+            <Smartphone className="w-3.5 h-3.5" />
+            <span className="hidden xs:inline">Install App</span>
+          </button>
 
           {/* Add Doc Button */}
           <button
             onClick={onOpenAddModal}
-            className="flex items-center gap-1 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#8D5050] hover:bg-[#743E3E] text-white shadow-warm-sm transition-all active:scale-95"
+            className="flex items-center gap-1 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#8D5050] hover:bg-[#743E3E] text-white shadow-warm-sm transition-all active:scale-95 cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span className="hidden xs:inline">Add Doc</span>
@@ -99,7 +99,7 @@ export default function TopHeader({
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="w-9 h-9 rounded-full bg-[#FFFFFF] border border-[#EADFD7] hover:bg-[#F5ECE5] flex items-center justify-center text-[#5C4A3E] transition-colors relative shadow-warm-sm"
+              className="w-9 h-9 rounded-full bg-[#FFFFFF] border border-[#EADFD7] hover:bg-[#F5ECE5] flex items-center justify-center text-[#5C4A3E] transition-colors relative shadow-warm-sm cursor-pointer"
               title="Notifications"
             >
               <Bell className="w-4 h-4" />
@@ -110,11 +110,8 @@ export default function TopHeader({
               <div className="absolute right-0 mt-2 w-64 bg-[#FFFFFF] border border-[#EADFD7] rounded-2xl p-3 shadow-warm-lg z-50 text-left animate-in fade-in duration-150">
                 <span className="text-xs font-bold text-[#3E2F28] block mb-2">Vault Activity</span>
                 <div className="text-[11px] space-y-2 text-[#7A665A]">
-                  <div className="p-2 rounded-xl bg-[#F7EBEB] text-[#743E3E]">
-                    🛡️ <strong>100% Compressed:</strong> All 12 documents converted to WebP (71% storage saved).
-                  </div>
-                  <div className="p-2 rounded-xl bg-[#E8F5E9] text-[#2E7D32]">
-                    ☁️ <strong>Cloud Vault:</strong> Encrypted & Synced.
+                  <div className="p-2.5 rounded-xl bg-[#E8F5E9] text-[#2E7D32]">
+                    🛡️ <strong>100% Protected:</strong> All 11 documents are verified & encrypted.
                   </div>
                 </div>
               </div>
@@ -125,7 +122,7 @@ export default function TopHeader({
           <div className="relative">
             <button
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#EADFD7] hover:bg-[#F5ECE5] transition-colors shadow-warm-sm"
+              className="flex items-center gap-2 pl-1 pr-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#EADFD7] hover:bg-[#F5ECE5] transition-colors shadow-warm-sm cursor-pointer"
             >
               <div className="w-7 h-7 rounded-full bg-[#8D5050] text-white font-bold text-xs flex items-center justify-center">
                 A
@@ -145,7 +142,7 @@ export default function TopHeader({
                 
                 <button
                   onClick={() => { onOpenQuickCopy(); setProfileDropdownOpen(false); }}
-                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#5C4A3E] hover:bg-[#F5ECE5] flex items-center gap-2 transition-colors mt-1"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#5C4A3E] hover:bg-[#F5ECE5] flex items-center gap-2 transition-colors mt-1 cursor-pointer"
                 >
                   <Copy className="w-3.5 h-3.5 text-[#8D5050]" />
                   <span>Quick Copy Sheet</span>
@@ -153,7 +150,7 @@ export default function TopHeader({
 
                 <button
                   onClick={() => { onLockVault(); setProfileDropdownOpen(false); }}
-                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#743E3E] hover:bg-[#FDF6F6] flex items-center gap-2 transition-colors"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#743E3E] hover:bg-[#FDF6F6] flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   <Lock className="w-3.5 h-3.5 text-[#8D5050]" />
                   <span>Lock Vault</span>
@@ -174,7 +171,7 @@ export default function TopHeader({
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search 10 important documents..."
+            placeholder="Search 11 documents..."
             className="w-full bg-transparent text-xs text-[#3E2F28] placeholder-[#A8978B] focus:outline-none"
           />
         </div>

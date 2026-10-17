@@ -15,14 +15,28 @@ export default function MyDocCard({ doc, onSelectDoc, onCopy }) {
 
   const activeImage = showBack && doc.backImage ? doc.backImage : doc.image;
 
-  const handleDownload = (e) => {
+  const handleDownload = async (e) => {
     e.stopPropagation();
-    const link = document.createElement('a');
-    link.href = activeImage;
-    link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}.webp`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      const response = await fetch(activeImage);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}_${showBack ? 'back' : 'front'}.webp`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      const link = document.createElement('a');
+      link.href = activeImage;
+      link.download = `${doc.title.replace(/[^a-zA-Z0-9]/g, '_')}.webp`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
     setMenuOpen(false);
   };
 
