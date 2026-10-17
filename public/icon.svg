@@ -1,15 +1,110 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="warmBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#A66363" />
-      <stop offset="100%" stop-color="#743E3E" />
+    <!-- Background Gradient: Luxurious Deep Terracotta to Rich Mahogany -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9E5A5A" />
+      <stop offset="50%" stop-color="#8D5050" />
+      <stop offset="100%" stop-color="#542B2B" />
     </linearGradient>
+
+    <!-- Inner Glow Gradient -->
+    <linearGradient id="borderGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35" />
+      <stop offset="50%" stop-color="#EADFD7" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#D5A7A7" stop-opacity="0.25" />
+    </linearGradient>
+
+    <!-- Shield / Vault Primary Surface -->
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#FBF8F5" />
+    </linearGradient>
+
+    <!-- Golden Lock / Security Accent -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE4C4" />
+      <stop offset="50%" stop-color="#F3C28B" />
+      <stop offset="100%" stop-color="#D49354" />
+    </linearGradient>
+
+    <!-- Soft Drop Shadow for Emblem -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#2E1616" flood-opacity="0.45" />
+    </filter>
+
+    <!-- Inner Shadow for Lock Keyhole -->
+    <filter id="insetLock" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#4A2323" flood-opacity="0.3" />
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#warmBg)" />
-  <!-- Folder shape -->
-  <path d="M110 390 L110 180 C110 160 125 145 145 145 L215 145 L245 180 L367 180 C387 180 402 195 402 215 L402 390 C402 410 387 425 367 425 L145 425 C125 425 110 410 110 390 Z" fill="#FFFFFF" fill-opacity="0.95" />
-  <!-- Lock keyhole badge in center -->
-  <circle cx="256" cy="305" r="42" fill="#8D5050" />
-  <circle cx="256" cy="295" r="10" fill="#FFFFFF" />
-  <path d="M251 298 L261 298 L264 322 L248 322 Z" fill="#FFFFFF" />
+
+  <!-- 1. Base App Squircle with rounded corners (iOS / Android 112px radius) -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGradient)" />
+
+  <!-- 2. Subtle Inner Border / Rim for Premium Depth -->
+  <rect x="26" y="26" width="460" height="460" rx="110" fill="none" stroke="url(#borderGlow)" stroke-width="4" />
+
+  <!-- 3. Ambient Light Glow Arc -->
+  <path d="M 60 136 C 130 60, 220 40, 340 40" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="3" stroke-linecap="round" fill="none" />
+
+  <!-- 4. Main Emblem: Vault Document Shield with Shadow -->
+  <g filter="url(#softShadow)">
+    
+    <!-- Document Folder Body / Shield Outline -->
+    <path d="M 160 145
+             L 280 145
+             L 325 190
+             L 352 190
+             C 365 190, 372 198, 372 210
+             L 372 315
+             C 372 375, 290 415, 256 426
+             C 222 415, 140 375, 140 315
+             L 140 165
+             C 140 154, 148 145, 160 145 Z"
+          fill="url(#shieldGrad)" />
+
+    <!-- Folder Tab Corner Detail -->
+    <path d="M 280 145 L 280 190 L 325 190 Z" fill="#EADFD7" opacity="0.9" />
+
+    <!-- Document Decorative Data Stripes -->
+    <rect x="180" y="225" width="152" height="10" rx="5" fill="#D5C5B8" opacity="0.65" />
+    <rect x="180" y="247" width="95" height="10" rx="5" fill="#D5C5B8" opacity="0.45" />
+
+    <!-- Center Vault Security Lock Emblem -->
+    <g transform="translate(256, 318)">
+      <!-- Lock Shackle -->
+      <path d="M -22 -14
+               L -22 -32
+               C -22 -48, 22 -48, 22 -32
+               L 22 -14"
+            fill="none"
+            stroke="url(#goldGrad)"
+            stroke-width="11"
+            stroke-linecap="round" />
+
+      <!-- Lock Solid Body -->
+      <rect x="-38" y="-14" width="76" height="58" rx="18" fill="url(#bgGradient)" stroke="url(#goldGrad)" stroke-width="4" filter="url(#insetLock)" />
+
+      <!-- Keyhole Circle & Slot -->
+      <circle cx="0" cy="10" r="7" fill="url(#goldGrad)" />
+      <polygon points="-4,13 4,13 6,26 -6,26" fill="url(#goldGrad)" />
+    </g>
+
+  </g>
+
+  <!-- 5. Top Right Golden Security Sparkle Star -->
+  <g transform="translate(376, 126)">
+    <path d="M 0 -22
+             C 0 -6, 6 0, 22 0
+             C 6 0, 0 6, 0 22
+             C 0 6, -6 0, -22 0
+             C -6 0, 0 -6, 0 -22 Z"
+          fill="url(#goldGrad)"
+          filter="url(#softShadow)" />
+    <circle cx="0" cy="0" r="4" fill="#FFFFFF" opacity="0.9" />
+  </g>
+
+  <!-- 6. Bottom Small Accent Dot -->
+  <circle cx="395" cy="155" r="4" fill="url(#goldGrad)" opacity="0.8" />
+
 </svg>
