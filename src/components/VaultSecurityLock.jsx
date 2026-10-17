@@ -8,14 +8,12 @@ import {
   Lock, 
   ArrowRight, 
   KeyRound,
-  UserCheck,
-  Sparkles,
-  CloudCheck
+  UserCheck
 } from 'lucide-react';
-import { authenticateVault, VAULT_ACCOUNT } from '../supabase';
+import { authenticateVault } from '../supabase';
 
 export default function VaultSecurityLock({ onUnlock }) {
-  const [identifier, setIdentifier] = useState(VAULT_ACCOUNT.username);
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,12 +45,6 @@ export default function VaultSecurityLock({ onUnlock }) {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleAutofill = () => {
-    setIdentifier(VAULT_ACCOUNT.username);
-    setPassword(VAULT_ACCOUNT.masterPassword);
-    setErrorMessage('');
   };
 
   return (
@@ -106,7 +98,7 @@ export default function VaultSecurityLock({ onUnlock }) {
           <div>
             <label className="block text-[11px] font-bold text-[#5C4A3E] uppercase tracking-wider mb-1.5 flex items-center justify-between">
               <span>Vault ID / Username</span>
-              <span className="text-[10px] text-[#A8978B] font-normal">Ashraf's Private Account</span>
+              <span className="text-[10px] text-[#A8978B] font-normal">Private Locker</span>
             </label>
             <div className="relative flex items-center">
               <UserCheck className="w-4 h-4 text-[#8D5050] absolute left-3.5 pointer-events-none" />
@@ -114,7 +106,7 @@ export default function VaultSecurityLock({ onUnlock }) {
                 type="text"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="e.g. ashraf.vault786 or email"
+                placeholder="Enter ID or username..."
                 autoComplete="username"
                 className="w-full pl-10 pr-4 py-2.5 bg-[#FBF8F5] border border-[#EADFD7] rounded-2xl text-xs sm:text-sm text-[#3E2F28] font-medium placeholder-[#B8A79B] focus:outline-none focus:border-[#8D5050] focus:ring-2 focus:ring-[#8D5050]/15 transition-all"
               />
@@ -128,7 +120,7 @@ export default function VaultSecurityLock({ onUnlock }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-[10px] text-[#8D5050] hover:underline font-bold flex items-center gap-1"
+                className="text-[10px] text-[#8D5050] hover:underline font-bold flex items-center gap-1 cursor-pointer"
               >
                 {showPassword ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
                 <span>{showPassword ? 'Hide' : 'Show'}</span>
@@ -151,7 +143,7 @@ export default function VaultSecurityLock({ onUnlock }) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 py-3 px-4 rounded-2xl bg-[#8D5050] hover:bg-[#743E3E] active:scale-[0.99] text-white text-xs sm:text-sm font-bold shadow-warm flex items-center justify-center gap-2 transition-all disabled:opacity-60 cursor-pointer"
+            className="w-full mt-3 py-3 px-4 rounded-2xl bg-[#8D5050] hover:bg-[#743E3E] active:scale-[0.99] text-white text-xs sm:text-sm font-bold shadow-warm flex items-center justify-center gap-2 transition-all disabled:opacity-60 cursor-pointer"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -165,22 +157,6 @@ export default function VaultSecurityLock({ onUnlock }) {
           </button>
 
         </form>
-
-        {/* Quick Demo Credential Autofill Pill */}
-        <div className="mt-5 pt-4 border-t border-[#EADFD7] w-full flex flex-col items-center">
-          <p className="text-[11px] text-[#7A665A] mb-2">
-            Owner Quick Access:
-          </p>
-          <button
-            type="button"
-            onClick={handleAutofill}
-            className="px-3 py-1.5 rounded-full bg-[#F5ECE5] hover:bg-[#EADFD7] text-[#5C4A3E] text-[11px] font-bold border border-[#DFCEBF] flex items-center gap-1.5 transition-all active:scale-95"
-            title="Auto-fill Ashraf Ahmed's credentials"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#8D5050]" />
-            <span>Fill Ashraf's Credentials</span>
-          </button>
-        </div>
 
       </div>
 

@@ -6,12 +6,12 @@ export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Master Vault Credentials for Ashraf Ahmed
+// Master Vault Config for Ashraf Ahmed (Zero plaintext password in client code)
 export const VAULT_ACCOUNT = {
   email: 'ashraf.vault786@gmail.com',
   username: 'ashraf.vault786',
   alias: 'ashraf',
-  masterPassword: 'Ashraf#Vault@2026!',
+  passwordHash: '0f9afbd17ef062261aa307b40b5fbe376227529ac0176e4d9f8cf74d12012770',
   ownerName: 'Ashraf Ahmed'
 };
 
@@ -46,6 +46,18 @@ export const resolveVaultEmail = (inputIdentifier) => {
   return trimmed;
 };
 
+// Browser WebCrypto SHA-256 helper
+const computeSha256 = async (str) => {
+  try {
+    const msgUint8 = new TextEncoder().encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+  } catch (e) {
+    return null;
+  }
+};
+
 // Authenticate with Supabase Auth + Resilient Fallback
 export const authenticateVault = async (identifier, password) => {
   const email = resolveVaultEmail(identifier);
@@ -63,11 +75,11 @@ export const authenticateVault = async (identifier, password) => {
       return { success: true, method: 'supabase_cloud', user: data.user };
     }
 
-    // 2. If Supabase returns 'Email not confirmed' (standard in newly created Supabase accounts)
-    // or network error, verify against master vault credential
+    // 2. Cryptographic one-way hash check (zero plaintext leakage)
+    const inputHash = await computeSha256(trimmedPass);
     if (
       (email === VAULT_ACCOUNT.email || identifier.toLowerCase() === 'ashraf') &&
-      trimmedPass === VAULT_ACCOUNT.masterPassword
+      inputHash === VAULT_ACCOUNT.passwordHash
     ) {
       unlockVault(email);
       return { 
@@ -78,22 +90,16 @@ export const authenticateVault = async (identifier, password) => {
     }
 
     if (error) {
-      // Provide user-friendly error message
-      if (error.message?.includes('Email not confirmed')) {
-        return { 
-          success: false, 
-          error: 'Cloud vault verification pending. Use master password to unlock.' 
-        };
-      }
-      return { success: false, error: error.message || 'Invalid credentials' };
+      return { success: false, error: error.message || 'Invalid ID or Password' };
     }
 
     return { success: false, error: 'Invalid ID or Password' };
   } catch (err) {
-    // Resilient offline / network failure check
+    // Resilient offline check
+    const inputHash = await computeSha256(trimmedPass);
     if (
       (email === VAULT_ACCOUNT.email || identifier.toLowerCase() === 'ashraf') &&
-      trimmedPass === VAULT_ACCOUNT.masterPassword
+      inputHash === VAULT_ACCOUNT.passwordHash
     ) {
       unlockVault(email);
       return { success: true, method: 'offline_resilient', user: { email: VAULT_ACCOUNT.email } };
