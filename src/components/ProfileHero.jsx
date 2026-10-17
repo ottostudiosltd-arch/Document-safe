@@ -27,7 +27,7 @@ export default function ProfileHero({ onCopy, onOpenQuickCopy }) {
           <div className="relative">
             <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-brand-500/40 shadow-lg shadow-brand-500/20 bg-slate-800">
               <img 
-                src="/documents/aadhaar_front.jpg" 
+                src={`${import.meta.env.BASE_URL || '/'}documents/aadhaar_front.jpg`} 
                 alt="Ashraf Ahmed" 
                 className="w-full h-full object-cover object-top scale-125"
                 onError={(e) => {

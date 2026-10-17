@@ -1,27 +1,29 @@
-const CACHE_NAME = 'docusafe-cache-v1';
-const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/documents/aadhaar_front.jpg',
-  '/documents/aadhaar_back.jpg',
-  '/documents/pan_card.jpg',
-  '/documents/voter_id.jpg',
-  '/documents/driving_licence.jpg',
-  '/documents/bank_passbook.jpg',
-  '/documents/hdfc_debit_card.jpg',
-  '/documents/discover_card.jpg',
-  '/documents/marriage_certificate.jpg',
-  '/documents/identification_certificate.jpg',
-  '/documents/school_leaving_certificate.jpg',
-  '/documents/hifz_certificate.jpg'
-];
+const CACHE_NAME = 'docusafe-cache-v2';
 
 self.addEventListener('install', (event) => {
+  const scope = self.registration.scope;
+  const assetsToCache = [
+    scope,
+    scope + 'index.html',
+    scope + 'manifest.json',
+    scope + 'documents/aadhaar_front.jpg',
+    scope + 'documents/aadhaar_back.jpg',
+    scope + 'documents/pan_card.jpg',
+    scope + 'documents/voter_id.jpg',
+    scope + 'documents/driving_licence.jpg',
+    scope + 'documents/bank_passbook.jpg',
+    scope + 'documents/hdfc_debit_card.jpg',
+    scope + 'documents/discover_card.jpg',
+    scope + 'documents/marriage_certificate.jpg',
+    scope + 'documents/identification_certificate.jpg',
+    scope + 'documents/school_leaving_certificate.jpg',
+    scope + 'documents/hifz_certificate.jpg'
+  ];
+
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Caching core assets and documents');
-      return cache.addAll(ASSETS_TO_CACHE).catch(err => {
+      console.log('[Service Worker] Caching core assets and documents with scope:', scope);
+      return cache.addAll(assetsToCache).catch(err => {
         console.warn('[Service Worker] Non-critical cache error:', err);
       });
     })
@@ -46,7 +48,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Navigation preload or cache-first for images/documents, network-first for rest
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
@@ -64,9 +65,8 @@ self.addEventListener('fetch', (event) => {
         });
         return networkResponse;
       }).catch(() => {
-        // Fallback for html pages
-        if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('/index.html');
+        if (event.request.headers.get('accept')?.includes('text/html')) {
+          return caches.match(self.registration.scope + 'index.html');
         }
       });
     })

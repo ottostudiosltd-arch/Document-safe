@@ -1,3 +1,6 @@
+const BASE = import.meta.env.BASE_URL || '/';
+const docImg = (file) => `${BASE}documents/${file}`;
+
 export const INITIAL_DOCUMENTS = [
   {
     id: 'aadhaar',
@@ -14,8 +17,8 @@ export const INITIAL_DOCUMENTS = [
     badge: 'National ID',
     status: 'Verified',
     address: '204, VILL-SHERALIPUR, Lamajuar, PO: Lamajuar, DIST: Sribhumi, Assam - 788701',
-    image: '/documents/aadhaar_front.jpg',
-    backImage: '/documents/aadhaar_back.jpg',
+    image: docImg('aadhaar_front.jpg'),
+    backImage: docImg('aadhaar_back.jpg'),
     notes: 'Official UIDAI Aadhaar card with online QR verification code and Virtual ID (VID).',
     tags: ['Aadhaar', 'UIDAI', 'National ID', 'KYC', 'Official'],
     keyFields: [
@@ -40,7 +43,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Lifetime Validity',
     badge: 'Tax & Banking ID',
     status: 'Verified',
-    image: '/documents/pan_card.jpg',
+    image: docImg('pan_card.jpg'),
     notes: 'Primary Tax & Banking Identification card issued by Income Tax Department.',
     tags: ['PAN', 'Tax', 'Income Tax', 'KYC', 'Finance'],
     keyFields: [
@@ -64,7 +67,7 @@ export const INITIAL_DOCUMENTS = [
     badge: 'Electoral ID',
     status: 'Verified',
     address: '204, Sheralipur (Blk-1 & 2), Badarpur, Bhanga Bazar, District - Sribhumi, Assam - 788701',
-    image: '/documents/voter_id.jpg',
+    image: docImg('voter_id.jpg'),
     notes: 'Assembly Constituency 123 - Karimganj North, Polling Station 634 NO.SHERALIPUR L.P. SCHOOL.',
     tags: ['Voter ID', 'EPIC', 'Election Commission', 'Constituency 123'],
     keyFields: [
@@ -90,7 +93,7 @@ export const INITIAL_DOCUMENTS = [
     badge: 'Valid till 2038',
     status: 'Verified',
     address: 'GAT NO 983/3B PUNE NAGAR RD NR MALTHAN PHATA, Shikrapur, Shirur, Pune, MH, PIN: 412208',
-    image: '/documents/driving_licence.jpg',
+    image: docImg('driving_licence.jpg'),
     notes: 'Smart Card Motor Driving Licence for Motorcycle with Gear (MCWG). RTO MH12 Pune.',
     tags: ['Driving Licence', 'Transport', 'MH12 Pune', 'Smart Card', 'MCWG'],
     keyFields: [
@@ -113,7 +116,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Active Account',
     badge: 'Savings Account',
     status: 'Verified',
-    image: '/documents/bank_passbook.jpg',
+    image: docImg('bank_passbook.jpg'),
     notes: 'Primary HDFC Savings Bank account at Shikrapur Branch (Code 2872), Tal Shirur, Dist Pune.',
     tags: ['Bank', 'HDFC Bank', 'Passbook', 'IFSC', 'Finance'],
     keyFields: [
@@ -138,7 +141,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: '08/27',
     badge: 'VISA Platinum',
     status: 'Active',
-    image: '/documents/hdfc_debit_card.jpg',
+    image: docImg('hdfc_debit_card.jpg'),
     notes: 'HDFC MoneyBack Contactless Chip Debit Card linked to primary savings account.',
     tags: ['Debit Card', 'HDFC', 'Visa', 'Card', 'Banking'],
     keyFields: [
@@ -159,7 +162,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: '11/30',
     badge: 'Discover / Pulse',
     status: 'Active',
-    image: '/documents/discover_card.jpg',
+    image: docImg('discover_card.jpg'),
     notes: 'Discover / Pulse network payment card. Valid thru Nov 2030.',
     tags: ['Payment Card', 'Discover', 'Pulse', 'Financial'],
     keyFields: [
@@ -180,7 +183,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Permanent Legal Record',
     badge: 'Legal Marriage Record',
     status: 'Verified',
-    image: '/documents/marriage_certificate.jpg',
+    image: docImg('marriage_certificate.jpg'),
     notes: 'Solemnized on 07/12/2022. Registered in Office of Muslim Marriage Registrar under Mahamadan Law (Shariat Act).',
     tags: ['Marriage', 'Nikahnama', 'Govt of Assam', 'Legal Record', 'Quazi'],
     keyFields: [
@@ -205,7 +208,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Official Certificate',
     badge: 'Passport Verification',
     status: 'Verified',
-    image: '/documents/identification_certificate.jpg',
+    image: docImg('identification_certificate.jpg'),
     notes: 'Official residence & identification certificate issued for the purpose of Applying for Passport. Holding No. 193.',
     tags: ['Panchayat', 'Passport Document', 'Identification', 'Govt of Assam'],
     keyFields: [
@@ -231,7 +234,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Permanent Academic Record',
     badge: 'Academic TC',
     status: 'Verified',
-    image: '/documents/school_leaving_certificate.jpg',
+    image: docImg('school_leaving_certificate.jpg'),
     notes: 'Official Transfer / School Leaving Certificate. Completed Class VIII on 31/12/2011. Character: Good.',
     tags: ['Education', 'School Leaving', 'Transfer Certificate', 'TC', 'School'],
     keyFields: [
@@ -257,7 +260,7 @@ export const INITIAL_DOCUMENTS = [
     expiryDate: 'Lifetime Honor',
     badge: 'Sanad / Distinction',
     status: 'Verified',
-    image: '/documents/hifz_certificate.jpg',
+    image: docImg('hifz_certificate.jpg'),
     notes: 'Completed complete memorization of the Holy Quran (Hifz) with distinction (Aala grade) at Jamia Islamia Ishaatul Uloom Akkalkuwa.',
     tags: ['Hifz', 'Sanad', 'Islamic Certificate', 'Akkalkuwa', 'Honor'],
     keyFields: [
