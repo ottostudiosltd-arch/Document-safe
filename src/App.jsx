@@ -24,9 +24,8 @@ export default function App() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isQuickCopyOpen, setIsQuickCopyOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Security Lock state
+  // Security Lock state - Vault starts locked for security
   const [isLocked, setIsLocked] = useState(() => isVaultLocked());
 
   // Custom user docs in localStorage
@@ -148,12 +147,22 @@ export default function App() {
     const q = searchTerm.toLowerCase();
     return allDocuments.filter((doc) => {
       const inTitle = doc.title?.toLowerCase().includes(q);
-      const inNumber = doc.docNumber?.toLowerCase().includes(q);
+      const inNumber = (doc.docNumber || doc.rawDocNumber || '').toLowerCase().includes(q);
       const inIssuer = doc.issuer?.toLowerCase().includes(q);
       const inTags = doc.tags?.some(t => t.toLowerCase().includes(q));
       return inTitle || inNumber || inIssuer || inTags;
     });
   }, [allDocuments, searchTerm]);
+
+  // 100% SOLID LOCK SCREEN: If vault is locked, DO NOT render documents into DOM!
+  if (isLocked) {
+    return (
+      <>
+        <VaultSecurityLock onUnlock={handleUnlock} />
+        <Toast toast={toast} onClose={() => setToast(null)} />
+      </>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FBF8F5] text-[#3E2F28] font-sans flex antialiased selection:bg-[#D5A7A7] selection:text-[#3E2F28]">
@@ -231,7 +240,7 @@ export default function App() {
         </main>
       </div>
 
-      {/* Mobile Bottom Navigation Bar (as shown on the iPhone in Image 2) */}
+      {/* Mobile Bottom Navigation Bar */}
       <MobileBottomNav
         activeTab={activeTab}
         setActiveTab={(tab) => {
@@ -241,11 +250,6 @@ export default function App() {
         onOpenQuickCopy={() => setIsQuickCopyOpen(true)}
         onLockVault={handleLockVault}
       />
-
-      {/* Vault Security Screen (when locked) */}
-      {isLocked && (
-        <VaultSecurityLock onUnlock={handleUnlock} />
-      )}
 
       {/* Document Detail & Inspection Modal */}
       <DocumentModal
@@ -268,7 +272,7 @@ export default function App() {
         onCopy={handleCopy}
       />
 
-      {/* Settings Modal (PIN & Supabase status) */}
+      {/* Settings Modal (PIN & Storage status) */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

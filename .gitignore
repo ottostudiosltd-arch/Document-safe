@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Confidential Government Documents - NEVER commit real pictures to Git!
+public/documents/*.jpg
+public/documents/*.jpeg
+public/documents/*.png
+public/documents/*.webp
+!public/documents/*.svg
